@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: rs.ac.bg.fon.silab.AppKons.AppKonsApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 55.657 s - in rs.ac.bg.fon.silab.AppKons.AppKonsApplicationTests
