@@ -37,9 +37,9 @@ public interface StudentKonsultacijeService {
 
     public List<StudentKonsultacijeDTO> findByJMBGNastavnika(String JMBGNastavnika);
 
-    public void izbrisiStudentKonsultacije(BigInteger idKalendara, BigInteger idDogadjaja, String brojIndeksaStudenta);
+    public void otkaziZakazaneKonsultacije(BigInteger idKalendara, BigInteger idDogadjaja, String brojIndeksaStudenta);
 
-    public StudentKonsultacijeDTO zakazi(StudentKonsultacijeDTO konsultacije);
+    public StudentKonsultacijeDTO zakaziKonsultacije(StudentKonsultacijeDTO konsultacije);
 
     public StudentKonsultacijeDTO azurirajKonsultacije(StudentKonsultacijeDTO konsultacije);
 

@@ -7,6 +7,8 @@ package rs.ac.bg.fon.silab.AppKons.service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+import org.springframework.stereotype.Service;
 import rs.ac.bg.fon.silab.AppKons.dto.KorisnickiNalogDTO;
 import rs.ac.bg.fon.silab.AppKons.entities.KorisnickiNalog;
 
@@ -18,14 +20,16 @@ public interface KorisnickiNalogService {
 
     public KorisnickiNalogDTO login(String username, String password);
 
-    public KorisnickiNalogDTO register(KorisnickiNalogDTO user);
+    public KorisnickiNalogDTO registrujSe(KorisnickiNalogDTO user);
 
-    public KorisnickiNalog findByKorisnickoIme(String korisnickoIme);
+    public Optional<KorisnickiNalog> findByKorisnickoIme(String korisnickoIme);
 
     public Object authenticate(KorisnickiNalogDTO user) throws Exception;
 
     public List<KorisnickiNalogDTO> findAll();
 
     public String tipUsera(BigDecimal korID);
+
+    public Boolean existsByKorisnickoIme(String korisnickoIme);
 
 }

@@ -57,14 +57,14 @@ public class StudentKonsultacijeRestController {
 
     @RequestMapping(value = "izbrisi", method = RequestMethod.DELETE)
     public void izbrisiStudentKonsultacije(@RequestParam BigInteger idKalendara, @RequestParam BigInteger idDogadjaja, @RequestParam String brojIndeksaStudenta) {
-        service.izbrisiStudentKonsultacije(idKalendara, idDogadjaja, brojIndeksaStudenta);
+        service.otkaziZakazaneKonsultacije(idKalendara, idDogadjaja, brojIndeksaStudenta);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public @ResponseBody
     Object zakaziKonsultacije(@RequestBody StudentKonsultacijeDTO konsultacije) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.zakazi(konsultacije));
+            return ResponseEntity.status(HttpStatus.OK).body(service.zakaziKonsultacije(konsultacije));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Greska. Ne postoji takav Student/Nastavnik.");
         }

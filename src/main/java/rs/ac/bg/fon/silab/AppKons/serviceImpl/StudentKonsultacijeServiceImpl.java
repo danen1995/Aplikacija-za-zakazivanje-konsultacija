@@ -61,11 +61,11 @@ public class StudentKonsultacijeServiceImpl implements StudentKonsultacijeServic
         return studentKonsDTO;
     }
 
-    public void izbrisiStudentKonsultacije(BigInteger idKalendara, BigInteger idDogadjaja, String brojIndeksaStudenta) {
+    public void otkaziZakazaneKonsultacije(BigInteger idKalendara, BigInteger idDogadjaja, String brojIndeksaStudenta) {
         repository.deleteById(new StudentKonsultacijePK(idKalendara, idDogadjaja, brojIndeksaStudenta));
     }
 
-    public StudentKonsultacijeDTO zakazi(StudentKonsultacijeDTO konsultacije) {
+    public StudentKonsultacijeDTO zakaziKonsultacije(StudentKonsultacijeDTO konsultacije) {
         return mapper.studentKonsultacijeToStudentKonsultacijeDTO(repository.save(mapper.studentKonsultacijeDTOToStudentKonsultacije(konsultacije)));
     }
 

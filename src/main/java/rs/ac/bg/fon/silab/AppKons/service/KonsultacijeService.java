@@ -29,9 +29,9 @@ public interface KonsultacijeService {
 
     public List<KonsultacijeDTO> vratiKonsultacijeZaNastavnika(String JMBGNastavnika);
 
-    public KonsultacijeDTO generisi(KonsultacijeDTO konsultacije);
+    public KonsultacijeDTO generisiKonsultacije(KonsultacijeDTO konsultacije);
 
     public List<KonsultacijeDTO> vratiKonsultacijeZaNastavnikovKalendar(String jmbg, BigDecimal idKalendara);
 
-    public void izbrisiKonsultacije(BigInteger idKalendara, BigInteger idDogadjaja);
+    public void otkaziKonsultacije(BigInteger idKalendara, BigInteger idDogadjaja);
 }

@@ -39,12 +39,12 @@ public class KorisnickiNalogServiceImpl implements KorisnickiNalogService {
         return mapper.korisnickiNalogToKorisnickiNalogDTO(userDAO.login(username, password));
     }
 
-    public KorisnickiNalogDTO register(KorisnickiNalogDTO user) {
+    public KorisnickiNalogDTO registrujSe(KorisnickiNalogDTO user) {
         KorisnickiNalog kor = mapper.korisnickiNalogDTOToKorisnickiNalog(user);
         return mapper.korisnickiNalogToKorisnickiNalogDTO(userDAO.save(kor));
     }
 
-    public KorisnickiNalog findByKorisnickoIme(String korisnickoIme) {
+    public Optional<KorisnickiNalog> findByKorisnickoIme(String korisnickoIme) {
         return userDAO.findByKorisnickoIme(korisnickoIme);
     }
 
@@ -67,13 +67,22 @@ public class KorisnickiNalogServiceImpl implements KorisnickiNalogService {
     }
 
     public String tipUsera(BigDecimal korID) {
-        KorisnickiNalog kn = userDAO.nadjiPoIdu(korID);
-        System.out.println(kn.getKorisnickoIme());
-        if(kn.getStudent() == null){
-            return kn.getNastavnik().getJmbg();
-        }else{
-            return kn.getStudent().getBrojIndeksa();
+        Optional<KorisnickiNalog> kn = userDAO.nadjiPoIdu(korID);
+        System.out.println(kn.get().getKorisnickoIme());
+        if (kn.get().getKorisnickoIme() == null) {
+            return kn.get().getNastavnik().getJmbg();
+        } else {
+            return kn.get().getStudent().getBrojIndeksa();
         }
+    }
+
+//    @Override
+//    public Boolean existsByKorisnickoIme(String korisnickoIme) {
+//        return userDAO.existsByKorisnickoIme(korisnickoIme);
+//    }
+    
+    public Boolean existsByKorisnickoIme(String korisnickoIme) {
+        return userDAO.existsByKorisnickoIme(korisnickoIme);
     }
 
 }

@@ -40,12 +40,12 @@ public class Prilog implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "ID_PRILOGA")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private BigDecimal idPriloga;
     @Column(name = "NAZIV")
     private String naziv;
     @Column(name = "LOKACIJA")
-    private String lokacija;
+    private byte[] lokacija;
     @JoinColumns({
         @JoinColumn(name = "ID_KALENDARA", referencedColumnName = "ID_KALENDARA"),
         @JoinColumn(name = "ID_DOGADJAJA", referencedColumnName = "ID_DOGADJAJA"),
@@ -58,6 +58,12 @@ public class Prilog implements Serializable {
 
     public Prilog(BigDecimal idPriloga) {
         this.idPriloga = idPriloga;
+    }
+
+    public Prilog(String naziv, byte[] lokacija, StudentKonsultacije studentKonsultacije) {
+        this.naziv = naziv;
+        this.lokacija = lokacija;
+        this.studentKonsultacije = studentKonsultacije;
     }
 
     public BigDecimal getIdPriloga() {
@@ -76,11 +82,11 @@ public class Prilog implements Serializable {
         this.naziv = naziv;
     }
 
-    public String getLokacija() {
+    public byte[] getLokacija() {
         return lokacija;
     }
 
-    public void setLokacija(String lokacija) {
+    public void setLokacija(byte[] lokacija) {
         this.lokacija = lokacija;
     }
 
@@ -116,5 +122,5 @@ public class Prilog implements Serializable {
     public String toString() {
         return "com.diplomski.classes.Prilog[ idPriloga=" + idPriloga + " ]";
     }
-    
+
 }

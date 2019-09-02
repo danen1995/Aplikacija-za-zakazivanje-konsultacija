@@ -50,7 +50,7 @@ public class KonsultacijeServiceImpl implements KonsultacijeService  {
         return konsDTO;
     }
 
-    public KonsultacijeDTO generisi(KonsultacijeDTO konsultacije) {
+    public KonsultacijeDTO generisiKonsultacije(KonsultacijeDTO konsultacije) {
         Konsultacije kons = mapper.konsultacijeDTOToKonsultacije(konsultacije);
         return mapper.konsultacijeToKonsultacijeDTO(repository.save(kons));
     }
@@ -64,7 +64,7 @@ public class KonsultacijeServiceImpl implements KonsultacijeService  {
         return konsDTO;
     }
 
-    public void izbrisiKonsultacije(BigInteger idKalendara, BigInteger idDogadjaja) {
+    public void otkaziKonsultacije(BigInteger idKalendara, BigInteger idDogadjaja) {
         repository.deleteById(new DogadjajPK(idKalendara, idDogadjaja));
     }
 

@@ -23,6 +23,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -30,7 +31,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Dane
  */
 @Entity
-@Table(name = "KORISNICKI_NALOG")
+@Table(name = "KORISNICKI_NALOG", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+            "ID_KOR_NAL"
+        }),
+        @UniqueConstraint(columnNames = {
+            "KORISNICKO_IME"
+        })
+})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "KorisnickiNalog.findAll", query = "SELECT k FROM KorisnickiNalog k"),

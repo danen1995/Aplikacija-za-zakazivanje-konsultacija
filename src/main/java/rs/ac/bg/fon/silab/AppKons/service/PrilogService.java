@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import rs.ac.bg.fon.silab.AppKons.dto.KonsultacijeDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.PrilogDTO;
 import rs.ac.bg.fon.silab.AppKons.entities.DogadjajPK;
@@ -26,8 +27,10 @@ import rs.ac.bg.fon.silab.AppKons.dao.PrilogDAO;
  */
 public interface PrilogService {
 
-    public PrilogDTO dodajPrilog(PrilogDTO prilogDTO);
+    public Prilog dodajPrilog(MultipartFile file, BigInteger idKalendara, BigInteger idDogadjaja, String brojIndeksa);
 
     public List<PrilogDTO> findAll();
+
+    public Prilog findByStudentKonsultacije(BigInteger idKalendara, BigInteger idDogadjaja, String brojIndeksa);
 
 }

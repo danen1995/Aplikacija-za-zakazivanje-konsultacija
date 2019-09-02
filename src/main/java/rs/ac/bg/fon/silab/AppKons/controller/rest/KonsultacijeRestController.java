@@ -62,7 +62,7 @@ public class KonsultacijeRestController {
     public @ResponseBody
     Object generisiKonsultacije(@RequestBody KonsultacijeDTO konsultacije) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.generisi(konsultacije));
+            return ResponseEntity.status(HttpStatus.OK).body(service.generisiKonsultacije(konsultacije));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Greska.");
         }
@@ -100,6 +100,6 @@ public class KonsultacijeRestController {
 
     @RequestMapping(value = "izbrisi", method = RequestMethod.DELETE)
     public void izbrisiKonsultacije(@RequestParam BigInteger idKalendara, @RequestParam BigInteger idDogadjaja) {
-        service.izbrisiKonsultacije(idKalendara, idDogadjaja);
+        service.otkaziKonsultacije(idKalendara, idDogadjaja);
     }
 }
