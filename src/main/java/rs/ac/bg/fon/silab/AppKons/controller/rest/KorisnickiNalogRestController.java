@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -36,6 +37,7 @@ import rs.ac.bg.fon.silab.AppKons.exception.AppException;
 import rs.ac.bg.fon.silab.AppKons.payload.ApiResponse;
 import rs.ac.bg.fon.silab.AppKons.payload.JwtAuthenticationResponse;
 import rs.ac.bg.fon.silab.AppKons.security.JwtTokenProvider;
+import rs.ac.bg.fon.silab.AppKons.security.UserPrincipal;
 import rs.ac.bg.fon.silab.AppKons.service.KorisnickiNalogService;
 import rs.ac.bg.fon.silab.AppKons.serviceImpl.KorisnickiNalogServiceImpl;
 
@@ -85,6 +87,7 @@ public class KorisnickiNalogRestController {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
+
         Rola userRole = rolaRepository.findByNazivRole("ROLE_STUDENT")
                 .orElseThrow(() -> new AppException("User Role not set."));
         korisnickiNalogDTO.setRolaCollection(Collections.singleton(userRole));
@@ -102,6 +105,10 @@ public class KorisnickiNalogRestController {
     @RequestMapping(value = "/allAcounts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     Object findAll() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        System.out.println(authentication.getAuthorities().size());
+        
         List<KorisnickiNalogDTO> nalozi = service.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(nalozi);
     }

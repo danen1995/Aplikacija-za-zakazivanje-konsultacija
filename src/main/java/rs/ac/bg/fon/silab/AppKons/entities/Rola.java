@@ -39,8 +39,6 @@ public class Rola implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "NAZIV_ROLE")
     private String nazivRole;
-    @ManyToMany(mappedBy = "rolaCollection")
-    private Collection<KorisnickiNalog> korisnickiNalogCollection;
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -103,13 +101,4 @@ public class Rola implements Serializable {
         return "rs.ac.bg.fon.silab.AppKons.entities.Rola[ idRole=" + idRole + " ]";
     }
 
-    @XmlTransient
-    public Collection<KorisnickiNalog> getKorisnickiNalogCollection() {
-        return korisnickiNalogCollection;
-    }
-
-    public void setKorisnickiNalogCollection(Collection<KorisnickiNalog> korisnickiNalogCollection) {
-        this.korisnickiNalogCollection = korisnickiNalogCollection;
-    }
-    
 }

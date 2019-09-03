@@ -6,6 +6,7 @@
 package rs.ac.bg.fon.silab.AppKons.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.math.BigDecimal;
 import java.util.Collection;
 import javax.xml.bind.annotation.XmlTransient;

@@ -29,21 +29,28 @@ public class UserPrincipal implements UserDetails {
     @JsonIgnore
     private String password;
 
-    public UserPrincipal(BigDecimal id, String username, String password) {
+    private Collection<? extends GrantedAuthority> authorities;
+
+    public UserPrincipal(BigDecimal id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.authorities = authorities;
     }
 
     public static UserPrincipal create(KorisnickiNalog user) {
-//        List<GrantedAuthority> authorities = user.getRoles().stream().map(role
-//                -> new SimpleGrantedAuthority(role.getName().name())
-//        ).collect(Collectors.toList());
+        List<GrantedAuthority> authorities = user.getRolaCollection().stream().map(role
+                -> new SimpleGrantedAuthority(role.getNazivRole())
+        ).collect(Collectors.toList());
+        
+        System.out.println("DANE123" + authorities.get(0).getAuthority());
+
 
         return new UserPrincipal(
                 user.getIdKorisnickogNaloga(),
                 user.getKorisnickoIme(),
-                user.getLozinka()
+                user.getLozinka(),
+                authorities
         );
     }
 
@@ -101,6 +108,8 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
+    
+    
 }

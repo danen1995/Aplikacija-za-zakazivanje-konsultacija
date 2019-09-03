@@ -1,7 +1,5 @@
 package rs.ac.bg.fon.silab.AppKons.security;
 
-
-
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import java.lang.annotation.*;

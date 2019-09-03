@@ -46,6 +46,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(()
                         -> new UsernameNotFoundException("User not found with username : " + username)
                 );
+        System.out.println("loadUserByUsername "+ user.getRolaCollection().size());
         return UserPrincipal.create(user);
     }
 
@@ -54,6 +55,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         KorisnickiNalog user = userRepository.nadjiPoIdu(id).orElseThrow(
                 () -> new ResourceNotFoundException("User", "id", id)
         );
+        System.out.println("loadUserById" + user.getRolaCollection().size());
 
         return UserPrincipal.create(user);
     }

@@ -1,7 +1,5 @@
 package rs.ac.bg.fon.silab.AppKons.security;
 
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     /*
     Svaki put kad se identifikuje request prvo se pozove ova metoda - valjda.
         
-    */
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
@@ -63,9 +61,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     That would avoid the following database hit. It's completely up to you.
                  */
                 UserDetails userDetails = customUserDetailsService.loadUserById(userId);
+                System.out.println("nakon load user by id" + userDetails.getAuthorities().size());
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
+                System.out.println("VELICINA je " + authentication.getAuthorities().size());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception ex) {
