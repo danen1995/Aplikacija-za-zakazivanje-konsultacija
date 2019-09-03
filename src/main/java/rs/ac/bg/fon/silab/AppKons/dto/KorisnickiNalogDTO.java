@@ -5,7 +5,11 @@
  */
 package rs.ac.bg.fon.silab.AppKons.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.math.BigDecimal;
+import java.util.Collection;
+import javax.xml.bind.annotation.XmlTransient;
+import rs.ac.bg.fon.silab.AppKons.entities.Rola;
 
 /**
  *
@@ -17,6 +21,8 @@ public class KorisnickiNalogDTO {
     private String lozinka;
     private NastavnikDTO nastavnik;
     private StudentDTO student;
+    
+    private Collection<Rola> rolaCollection;
 
     public KorisnickiNalogDTO() {
     }
@@ -60,4 +66,12 @@ public class KorisnickiNalogDTO {
         this.student = student;
     }
 
+    @XmlTransient
+    public Collection<Rola> getRolaCollection() {
+        return rolaCollection;
+    }
+
+    public void setRolaCollection(Collection<Rola> rolaCollection) {
+        this.rolaCollection = rolaCollection;
+    }
 }

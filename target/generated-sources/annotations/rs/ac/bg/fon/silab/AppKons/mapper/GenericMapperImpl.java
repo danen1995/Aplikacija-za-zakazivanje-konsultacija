@@ -1,5 +1,7 @@
 package rs.ac.bg.fon.silab.AppKons.mapper;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 import rs.ac.bg.fon.silab.AppKons.dto.ClanstvoKomisijeDTO;
@@ -13,7 +15,6 @@ import rs.ac.bg.fon.silab.AppKons.dto.NastavnikDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.PokrivenostNastaveDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.PokrivenostNastavePKDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.PredmetDTO;
-import rs.ac.bg.fon.silab.AppKons.dto.PrilogDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.SkolskaGodinaDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.StudentDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.StudentKonsultacijeDTO;
@@ -30,7 +31,7 @@ import rs.ac.bg.fon.silab.AppKons.entities.Nastavnik;
 import rs.ac.bg.fon.silab.AppKons.entities.PokrivenostNastave;
 import rs.ac.bg.fon.silab.AppKons.entities.PokrivenostNastavePK;
 import rs.ac.bg.fon.silab.AppKons.entities.Predmet;
-import rs.ac.bg.fon.silab.AppKons.entities.Prilog;
+import rs.ac.bg.fon.silab.AppKons.entities.Rola;
 import rs.ac.bg.fon.silab.AppKons.entities.SkolskaGodina;
 import rs.ac.bg.fon.silab.AppKons.entities.Student;
 import rs.ac.bg.fon.silab.AppKons.entities.StudentKonsultacije;
@@ -39,8 +40,8 @@ import rs.ac.bg.fon.silab.AppKons.entities.TipDogadjaja;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-09-11T16:40:47+0200",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_65 (Oracle Corporation)"
+    date = "2019-09-03T12:57:45+0200",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_181 (Oracle Corporation)"
 )
 @Component
 public class GenericMapperImpl implements GenericMapper {
@@ -57,6 +58,13 @@ public class GenericMapperImpl implements GenericMapper {
         korisnickiNalogDTO.setLozinka( korisnickiNalog.getLozinka() );
         korisnickiNalogDTO.setNastavnik( nastavnikToNastavnikDTO( korisnickiNalog.getNastavnik() ) );
         korisnickiNalogDTO.setStudent( studentToStudentDTO( korisnickiNalog.getStudent() ) );
+        Collection<Rola> collection = korisnickiNalog.getRolaCollection();
+        if ( collection != null ) {
+            korisnickiNalogDTO.setRolaCollection( new ArrayList<Rola>( collection ) );
+        }
+        else {
+            korisnickiNalogDTO.setRolaCollection( null );
+        }
 
         return korisnickiNalogDTO;
     }
@@ -73,6 +81,13 @@ public class GenericMapperImpl implements GenericMapper {
         korisnickiNalog.setLozinka( korisnickiNalogDTO.getLozinka() );
         korisnickiNalog.setNastavnik( nastavnikDTOToNastavnik( korisnickiNalogDTO.getNastavnik() ) );
         korisnickiNalog.setStudent( studentDTOToStudent( korisnickiNalogDTO.getStudent() ) );
+        Collection<Rola> collection = korisnickiNalogDTO.getRolaCollection();
+        if ( collection != null ) {
+            korisnickiNalog.setRolaCollection( new ArrayList<Rola>( collection ) );
+        }
+        else {
+            korisnickiNalog.setRolaCollection( null );
+        }
 
         return korisnickiNalog;
     }
@@ -369,38 +384,6 @@ public class GenericMapperImpl implements GenericMapper {
         predmetDTO.setGodinaStudija( predmet.getGodinaStudija() );
 
         return predmetDTO;
-    }
-
-    @Override
-    public Prilog prilogDTOToPrilog(PrilogDTO predmetDTO) {
-        if ( predmetDTO == null ) {
-            return null;
-        }
-
-        Prilog prilog = new Prilog();
-
-        prilog.setIdPriloga( predmetDTO.getIdPriloga() );
-        prilog.setNaziv( predmetDTO.getNaziv() );
-        prilog.setLokacija( predmetDTO.getLokacija() );
-        prilog.setStudentKonsultacije( studentKonsultacijeDTOToStudentKonsultacije( predmetDTO.getStudentKonsultacije() ) );
-
-        return prilog;
-    }
-
-    @Override
-    public PrilogDTO prilogToPrilogDTO(Prilog predmet) {
-        if ( predmet == null ) {
-            return null;
-        }
-
-        PrilogDTO prilogDTO = new PrilogDTO();
-
-        prilogDTO.setIdPriloga( predmet.getIdPriloga() );
-        prilogDTO.setNaziv( predmet.getNaziv() );
-        prilogDTO.setLokacija( predmet.getLokacija() );
-        prilogDTO.setStudentKonsultacije( studentKonsultacijeToStudentKonsultacijeDTO( predmet.getStudentKonsultacije() ) );
-
-        return prilogDTO;
     }
 
     @Override

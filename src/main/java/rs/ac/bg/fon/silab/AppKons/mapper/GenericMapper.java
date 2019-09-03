@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.fon.silab.AppKons.mapper;
 
+import java.util.Collection;
 import org.mapstruct.Mapper;
 import rs.ac.bg.fon.silab.AppKons.dto.ClanstvoKomisijeDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.DogadjajDTO;
@@ -35,6 +36,7 @@ import rs.ac.bg.fon.silab.AppKons.entities.PokrivenostNastave;
 import rs.ac.bg.fon.silab.AppKons.entities.PokrivenostNastavePK;
 import rs.ac.bg.fon.silab.AppKons.entities.Predmet;
 import rs.ac.bg.fon.silab.AppKons.entities.Prilog;
+import rs.ac.bg.fon.silab.AppKons.entities.Rola;
 import rs.ac.bg.fon.silab.AppKons.entities.SkolskaGodina;
 import rs.ac.bg.fon.silab.AppKons.entities.Student;
 import rs.ac.bg.fon.silab.AppKons.entities.StudentKonsultacije;
@@ -51,11 +53,11 @@ public interface GenericMapper {
     Student studentDTOToStudent(StudentDTO s);
 
     StudentDTO studentToStudentDTO(Student s);
-    
+
     Nastava nastavaDTOToNastava(NastavaDTO nastavaDTO);
 
     NastavaDTO nastavaToNastavaDTO(Nastava nastava);
-    
+
     ClanstvoKomisije clanstvoKomisijeDTOToClanstvoKomisije(ClanstvoKomisijeDTO clanstvoKomisjeDTO);
 
     ClanstvoKomisijeDTO clanstvoKomisijeToClanstvoKomisijeDTO(ClanstvoKomisije clanstvoKomisje);
@@ -71,7 +73,7 @@ public interface GenericMapper {
     Dogadjaj dogadjajDTOToDogadjaj(DogadjajDTO dogadjajDTO);
 
     DogadjajDTO dogadjajToDogadjajDTO(Dogadjaj dogadjaj);
-    
+
     DogadjajPK dogadjajPKDTOToDogadjajPK(DogadjajPKDTO dogadjajPKDTO);
 
     DogadjajPKDTO dogadjajPKToDogadjajPKDTO(DogadjajPK dogadjajPK);
@@ -80,9 +82,9 @@ public interface GenericMapper {
 
     PredmetDTO predmetToPredmetDTO(Predmet predmet);
 
-    Prilog prilogDTOToPrilog(PrilogDTO predmetDTO);
+    Prilog prilogDTOToPrilog(PrilogDTO prilogDTO);
 
-    PrilogDTO prilogToPrilogDTO(Prilog predmet);
+    PrilogDTO prilogToPrilogDTO(Prilog prilog);
 
     Kalendar kalendarDTOToKalendar(KalendarDTO kalendarDTO);
 

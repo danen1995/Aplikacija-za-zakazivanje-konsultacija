@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Rola.findAll", query = "SELECT r FROM Rola r")
     , @NamedQuery(name = "Rola.findByIdRole", query = "SELECT r FROM Rola r WHERE r.idRole = :idRole")
-    , @NamedQuery(name = "Rola.findByNazivRole", query = "SELECT r FROM Rola r WHERE r.nazivRole = :nazivRole")})
+    , @NamedQuery(name = "Rola.findByNazivRole", query = "SELECT r FROM Rola r WHERE r.nazivRole = ?1")})
 public class Rola implements Serializable {
 
     @Basic(optional = false)

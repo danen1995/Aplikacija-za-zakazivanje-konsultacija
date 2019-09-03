@@ -26,10 +26,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import rs.ac.bg.fon.silab.AppKons.dao.KorisnickiNalogDAO;
+import rs.ac.bg.fon.silab.AppKons.dao.RolaDAO;
 import rs.ac.bg.fon.silab.AppKons.dto.KorisnickiNalogDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.NastavnikDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.UserDTO;
 import rs.ac.bg.fon.silab.AppKons.entities.KorisnickiNalog;
+import rs.ac.bg.fon.silab.AppKons.entities.Rola;
+import rs.ac.bg.fon.silab.AppKons.exception.AppException;
 import rs.ac.bg.fon.silab.AppKons.payload.ApiResponse;
 import rs.ac.bg.fon.silab.AppKons.payload.JwtAuthenticationResponse;
 import rs.ac.bg.fon.silab.AppKons.security.JwtTokenProvider;
@@ -49,6 +52,9 @@ public class KorisnickiNalogRestController {
 
     @Autowired
     KorisnickiNalogService service;
+
+    @Autowired
+    RolaDAO rolaRepository;
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -79,12 +85,11 @@ public class KorisnickiNalogRestController {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
-
+        Rola userRole = rolaRepository.findByNazivRole("ROLE_STUDENT")
+                .orElseThrow(() -> new AppException("User Role not set."));
+        korisnickiNalogDTO.setRolaCollection(Collections.singleton(userRole));
         korisnickiNalogDTO.setLozinka(passwordEncoder.encode(korisnickiNalogDTO.getLozinka()));
-//        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-//                .orElseThrow(() -> new AppException("User Role not set."));
-//
-//        user.setRoles(Collections.singleton(userRole));
+
         KorisnickiNalogDTO result = service.registrujSe(korisnickiNalogDTO);
 
 //        URI location = ServletUriComponentsBuilder
