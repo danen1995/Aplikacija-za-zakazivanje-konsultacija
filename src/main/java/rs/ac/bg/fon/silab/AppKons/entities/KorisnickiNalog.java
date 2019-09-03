@@ -5,8 +5,10 @@
  */
 package rs.ac.bg.fon.silab.AppKons.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -19,12 +21,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,20 +37,31 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "KORISNICKI_NALOG", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {
+        "ID_KOR_NAL"
+    })
+    ,
         @UniqueConstraint(columnNames = {
-            "ID_KOR_NAL"
-        }),
-        @UniqueConstraint(columnNames = {
-            "KORISNICKO_IME"
-        })
+        "KORISNICKO_IME"
+    })
 })
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "KorisnickiNalog.findAll", query = "SELECT k FROM KorisnickiNalog k"),
-    @NamedQuery(name = "KorisnickiNalog.findByIdKorisnickogNaloga", query = "SELECT k FROM KorisnickiNalog k WHERE k.idKorisnickogNaloga = :idKorisnickogNaloga"),
-    @NamedQuery(name = "KorisnickiNalog.findByKorisnickoIme", query = "SELECT k FROM KorisnickiNalog k WHERE k.korisnickoIme = :korisnickoIme"),
+    @NamedQuery(name = "KorisnickiNalog.findAll", query = "SELECT k FROM KorisnickiNalog k")
+    ,
+    @NamedQuery(name = "KorisnickiNalog.findByIdKorisnickogNaloga", query = "SELECT k FROM KorisnickiNalog k WHERE k.idKorisnickogNaloga = :idKorisnickogNaloga")
+    ,
+    @NamedQuery(name = "KorisnickiNalog.findByKorisnickoIme", query = "SELECT k FROM KorisnickiNalog k WHERE k.korisnickoIme = :korisnickoIme")
+    ,
     @NamedQuery(name = "KorisnickiNalog.findByLozinka", query = "SELECT k FROM KorisnickiNalog k WHERE k.lozinka = :lozinka")})
 public class KorisnickiNalog implements Serializable {
+
+    @JoinTable(name = "KORISNICKI_NALOG_ROLA", joinColumns = {
+        @JoinColumn(name = "KORISNICKI_NALOG_ID", referencedColumnName = "ID_KOR_NAL")}, inverseJoinColumns = {
+        @JoinColumn(name = "ROLA_ID", referencedColumnName = "ID_ROLE")})
+    @ManyToMany
+    @JsonBackReference(value = "rolaCollection")
+    private Collection<Rola> rolaCollection;
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -122,8 +138,6 @@ public class KorisnickiNalog implements Serializable {
 //    public void setRoles(Set<UserRoleEnum> roles) {
 //        this.roles = roles;
 //    }
-
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -147,6 +161,15 @@ public class KorisnickiNalog implements Serializable {
     @Override
     public String toString() {
         return "com.diplomski.classes.KorisnickiNalog[ idKorisnickogNaloga=" + idKorisnickogNaloga + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Rola> getRolaCollection() {
+        return rolaCollection;
+    }
+
+    public void setRolaCollection(Collection<Rola> rolaCollection) {
+        this.rolaCollection = rolaCollection;
     }
 
 }

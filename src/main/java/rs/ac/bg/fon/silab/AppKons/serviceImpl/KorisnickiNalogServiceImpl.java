@@ -69,18 +69,13 @@ public class KorisnickiNalogServiceImpl implements KorisnickiNalogService {
     public String tipUsera(BigDecimal korID) {
         Optional<KorisnickiNalog> kn = userDAO.nadjiPoIdu(korID);
         System.out.println(kn.get().getKorisnickoIme());
-        if (kn.get().getKorisnickoIme() == null) {
+        if (kn.get().getStudent() == null) {
             return kn.get().getNastavnik().getJmbg();
         } else {
             return kn.get().getStudent().getBrojIndeksa();
         }
     }
 
-//    @Override
-//    public Boolean existsByKorisnickoIme(String korisnickoIme) {
-//        return userDAO.existsByKorisnickoIme(korisnickoIme);
-//    }
-    
     public Boolean existsByKorisnickoIme(String korisnickoIme) {
         return userDAO.existsByKorisnickoIme(korisnickoIme);
     }

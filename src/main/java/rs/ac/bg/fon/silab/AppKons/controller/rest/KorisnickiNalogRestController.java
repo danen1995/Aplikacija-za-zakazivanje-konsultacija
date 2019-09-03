@@ -38,7 +38,7 @@ import rs.ac.bg.fon.silab.AppKons.serviceImpl.KorisnickiNalogServiceImpl;
 
 @RestController
 @CrossOrigin
-
+@RequestMapping("/api/auth")
 public class KorisnickiNalogRestController {
 
     @Autowired
@@ -53,20 +53,9 @@ public class KorisnickiNalogRestController {
     @Autowired
     AuthenticationManager authenticationManager;
 
-//    @CrossOrigin
-//    @RequestMapping(value = "/login", method = RequestMethod.POST)
-//    public @ResponseBody
-//    Object login(@RequestBody KorisnickiNalogDTO user) {
-//        try {
-//            return ResponseEntity.status(HttpStatus.OK).body(service.authenticate(user));
-//        } catch (Exception ex) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Greska. Ne postoji takav Student/Nastavnik.");
-//
-//        }
-//    }
     @CrossOrigin
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<?> authenticateUser(@RequestBody KorisnickiNalogDTO loginRequest) {
+    @RequestMapping(value = "/signin", method = RequestMethod.POST)
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody KorisnickiNalogDTO loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -82,29 +71,10 @@ public class KorisnickiNalogRestController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
-//    @CrossOrigin
-//    @RequestMapping(value = "/register", method = RequestMethod.POST)
-//    public @ResponseBody
-//    Object register(@RequestBody KorisnickiNalogDTO user) {
-//        try {
-//            return service.registrujSe(user);
-//        } catch (Exception ex) {
-//            System.out.println("Message" + ex.getMessage());
-//            if (ex.getMessage().contains("[DIPLOMSKI.KORISNICKI_NALOG_UK1]")) {
-//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Došlo je do greške prilikom registracije. Korisnik sa tim korisnickim imenom vec postoji!");
-//            }
-//            if (ex.getMessage().contains("[DIPLOMSKI.KORISNICKI_NALOG_UK3]")) {
-//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Došlo je do greške prilikom registracije. Korisnik sa ovim brojem indeksa je vec registrovan.");
-//            } else {
-//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Došlo je do greške prilikom registracije. Nepoznata greska! Proverite konekciju.");
-//
-//            }
-//
-//        }
-//    }
     @CrossOrigin
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseEntity<?> registerUser(@Valid @RequestBody KorisnickiNalogDTO korisnickiNalogDTO) {
+
         if (service.existsByKorisnickoIme(korisnickiNalogDTO.getKorisnickoIme())) {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
@@ -120,18 +90,18 @@ public class KorisnickiNalogRestController {
 //        URI location = ServletUriComponentsBuilder
 //                .fromCurrentContextPath().path("/users/{username}")
 //                .buildAndExpand(result.getUsername()).toUri();
-        return ResponseEntity.ok(new ApiResponse(true, "Korisnik je uspesno registrovan"));
+        return ResponseEntity.ok(new ApiResponse(true, "User registered successfully"));
 //        return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
 
-    @RequestMapping(value = "/sviNalozi", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/allAcounts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     Object findAll() {
         List<KorisnickiNalogDTO> nalozi = service.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(nalozi);
     }
 
-    @RequestMapping(value = "/tipUsera", method = RequestMethod.GET)
+    @RequestMapping(value = "/studentOrProfessorID", method = RequestMethod.GET)
     public String tipUsera(@RequestParam(value = "korID") BigDecimal korID) {
         return service.tipUsera(korID);
     }
