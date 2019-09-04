@@ -38,7 +38,6 @@ public class MailNotificationRestController {
         try {
             service.sendNotification(email);
         }catch(MailException e){
-            System.out.println(e.getMessage());
             return "Greska u slanju mejla";
         }
         return "Uspesno poslat mejl.";

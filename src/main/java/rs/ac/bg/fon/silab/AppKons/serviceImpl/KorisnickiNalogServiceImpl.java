@@ -35,25 +35,23 @@ public class KorisnickiNalogServiceImpl implements KorisnickiNalogService {
     @Autowired
     GenericMapper mapper;
 
-    public KorisnickiNalogDTO login(String username, String password) {
-        return mapper.korisnickiNalogToKorisnickiNalogDTO(userDAO.login(username, password));
+    public Optional<KorisnickiNalogDTO> findByKorisnickoIme(String korisnickoIme) {
+        if (!userDAO.findByKorisnickoIme(korisnickoIme).isPresent()) {
+            return Optional.empty();
+        }
+        return Optional.of(mapper.korisnickiNalogToKorisnickiNalogDTO(userDAO.findByKorisnickoIme(korisnickoIme).get()));
+    }
+
+    public Optional<KorisnickiNalogDTO> findById(BigDecimal id) {
+        if (!userDAO.findById(id).isPresent()) {
+            return Optional.empty();
+        }
+        return Optional.of(mapper.korisnickiNalogToKorisnickiNalogDTO(userDAO.findById(id).get()));
     }
 
     public KorisnickiNalogDTO registrujSe(KorisnickiNalogDTO user) {
         KorisnickiNalog kor = mapper.korisnickiNalogDTOToKorisnickiNalog(user);
         return mapper.korisnickiNalogToKorisnickiNalogDTO(userDAO.save(kor));
-    }
-
-    public Optional<KorisnickiNalog> findByKorisnickoIme(String korisnickoIme) {
-        return userDAO.findByKorisnickoIme(korisnickoIme);
-    }
-
-    public Object authenticate(KorisnickiNalogDTO user) throws Exception {
-        KorisnickiNalog userDB = userDAO.login(user.getKorisnickoIme(), user.getLozinka());
-        if (userDB == null) {
-            throw new Exception("Unknown user.");
-        }
-        return userDB;
     }
 
     public List<KorisnickiNalogDTO> findAll() {
@@ -67,8 +65,7 @@ public class KorisnickiNalogServiceImpl implements KorisnickiNalogService {
     }
 
     public String tipUsera(BigDecimal korID) {
-        Optional<KorisnickiNalog> kn = userDAO.nadjiPoIdu(korID);
-        System.out.println(kn.get().getKorisnickoIme());
+        Optional<KorisnickiNalog> kn = userDAO.findById(korID);
         if (kn.get().getStudent() == null) {
             return kn.get().getNastavnik().getJmbg();
         } else {

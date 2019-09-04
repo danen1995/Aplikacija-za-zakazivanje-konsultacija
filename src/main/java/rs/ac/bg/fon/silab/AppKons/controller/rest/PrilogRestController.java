@@ -43,7 +43,6 @@ public class PrilogRestController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(service.dodajPrilog(file, idKalendara, idDogadjaja, brojIndeksa));
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Greska.");
         }
     }

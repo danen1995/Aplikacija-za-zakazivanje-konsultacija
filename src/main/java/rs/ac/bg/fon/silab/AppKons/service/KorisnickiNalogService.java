@@ -18,13 +18,11 @@ import rs.ac.bg.fon.silab.AppKons.entities.KorisnickiNalog;
  */
 public interface KorisnickiNalogService {
 
-    public KorisnickiNalogDTO login(String username, String password);
-
     public KorisnickiNalogDTO registrujSe(KorisnickiNalogDTO user);
 
-    public Optional<KorisnickiNalog> findByKorisnickoIme(String korisnickoIme);
+    public Optional<KorisnickiNalogDTO> findByKorisnickoIme(String korisnickoIme);
 
-    public Object authenticate(KorisnickiNalogDTO user) throws Exception;
+    public Optional<KorisnickiNalogDTO> findById(BigDecimal id);
 
     public List<KorisnickiNalogDTO> findAll();
 

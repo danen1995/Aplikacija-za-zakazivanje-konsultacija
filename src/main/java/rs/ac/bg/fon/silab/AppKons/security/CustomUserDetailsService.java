@@ -8,8 +8,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import rs.ac.bg.fon.silab.AppKons.dao.KorisnickiNalogDAO;
+import rs.ac.bg.fon.silab.AppKons.dto.KorisnickiNalogDTO;
 import rs.ac.bg.fon.silab.AppKons.entities.KorisnickiNalog;
 import rs.ac.bg.fon.silab.AppKons.exception.ResourceNotFoundException;
+import rs.ac.bg.fon.silab.AppKons.service.KorisnickiNalogService;
 
 /**
  * To authenticate a User or perform various role-based checks, Spring security
@@ -35,28 +37,26 @@ import rs.ac.bg.fon.silab.AppKons.exception.ResourceNotFoundException;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    KorisnickiNalogDAO userRepository;
+    KorisnickiNalogService service;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
         // Let people login with either username or email
-        KorisnickiNalog user = userRepository.findByKorisnickoIme(username)
+        //orElseThrow baca NoSuchElemenrException ako vrednost nije prisutna (isPresent)
+        KorisnickiNalogDTO user = service.findByKorisnickoIme(username)
                 .orElseThrow(()
                         -> new UsernameNotFoundException("User not found with username : " + username)
                 );
-        System.out.println("loadUserByUsername "+ user.getRolaCollection().size());
         return UserPrincipal.create(user);
     }
 
     @Transactional
     public UserDetails loadUserById(BigDecimal id) throws Throwable {
-        KorisnickiNalog user = userRepository.nadjiPoIdu(id).orElseThrow(
+        KorisnickiNalogDTO user = service.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("User", "id", id)
         );
-        System.out.println("loadUserById" + user.getRolaCollection().size());
-
         return UserPrincipal.create(user);
     }
 }

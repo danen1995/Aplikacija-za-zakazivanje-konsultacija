@@ -9,7 +9,6 @@ rs\ac\bg\fon\silab\AppKons\entities\ClanstvoKomisije.class
 rs\ac\bg\fon\silab\AppKons\dto\KalendarDTO.class
 rs\ac\bg\fon\silab\AppKons\entities\Rola.class
 rs\ac\bg\fon\silab\AppKons\entities\Predmet.class
-rs\ac\bg\fon\silab\AppKons\dto\PrilogDTO.class
 rs\ac\bg\fon\silab\AppKons\serviceImpl\KonsultacijeServiceImpl.class
 rs\ac\bg\fon\silab\AppKons\security\JwtAuthenticationEntryPoint.class
 rs\ac\bg\fon\silab\AppKons\entities\SkolskaGodina.class
@@ -24,7 +23,6 @@ rs\ac\bg\fon\silab\AppKons\dto\DogadjajDTO.class
 rs\ac\bg\fon\silab\AppKons\dto\KorisnickiNalogDTO.class
 rs\ac\bg\fon\silab\AppKons\dto\PokrivenostNastavePKDTO.class
 rs\ac\bg\fon\silab\AppKons\mapper\GenericMapperImpl.class
-rs\ac\bg\fon\silab\AppKons\service\PrilogService.class
 rs\ac\bg\fon\silab\AppKons\entities\DogadjajPK.class
 rs\ac\bg\fon\silab\AppKons\dao\PokrivenostDAO.class
 rs\ac\bg\fon\silab\AppKons\dto\SkolskaGodinaDTO.class
@@ -37,7 +35,6 @@ rs\ac\bg\fon\silab\AppKons\controller\rest\KonsultacijeRestController.class
 rs\ac\bg\fon\silab\AppKons\entities\Kalendar.class
 rs\ac\bg\fon\silab\AppKons\service\PokrivenostService.class
 rs\ac\bg\fon\silab\AppKons\dto\StudentKonsultacijePKDTO.class
-rs\ac\bg\fon\silab\AppKons\mapper\GenericMapper.class
 rs\ac\bg\fon\silab\AppKons\dao\PrilogDAO.class
 rs\ac\bg\fon\silab\AppKons\service\NastavnikService.class
 rs\ac\bg\fon\silab\AppKons\dto\PokrivenostNastaveDTO.class
@@ -57,7 +54,6 @@ rs\ac\bg\fon\silab\AppKons\entities\PokrivenostNastave.class
 rs\ac\bg\fon\silab\AppKons\controller\rest\StudentRestController.class
 rs\ac\bg\fon\silab\AppKons\dao\KonsultacijeDAO.class
 rs\ac\bg\fon\silab\AppKons\config\SecurityConfig.class
-rs\ac\bg\fon\silab\AppKons\controller\rest\PrilogRestController.class
 rs\ac\bg\fon\silab\AppKons\entities\Konsultacije.class
 rs\ac\bg\fon\silab\AppKons\entities\StudentKonsultacije.class
 rs\ac\bg\fon\silab\AppKons\dto\UserDTO.class

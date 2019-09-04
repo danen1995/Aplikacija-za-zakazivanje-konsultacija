@@ -7,6 +7,7 @@ package rs.ac.bg.fon.silab.AppKons.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 import java.util.Collection;
 import javax.xml.bind.annotation.XmlTransient;
@@ -18,21 +19,33 @@ import rs.ac.bg.fon.silab.AppKons.entities.Rola;
  */
 public class KorisnickiNalogDTO {
 
+    @JsonProperty(value = "idKorisnickogNaloga", access = JsonProperty.Access.WRITE_ONLY)
+    private BigDecimal idKorisnickogNaloga;
     private String korisnickoIme;
+    @JsonProperty(value = "lozinka", access = JsonProperty.Access.WRITE_ONLY)
     private String lozinka;
     private NastavnikDTO nastavnik;
     private StudentDTO student;
-    
     private Collection<Rola> rolaCollection;
 
     public KorisnickiNalogDTO() {
     }
 
-    public KorisnickiNalogDTO(BigDecimal idKorisnickogNaloga, String korisnickoIme, String lozinka, NastavnikDTO nastavnik, StudentDTO student) {
+    public KorisnickiNalogDTO(BigDecimal idKorisnickogNaloga, String korisnickoIme, String lozinka, NastavnikDTO nastavnik, StudentDTO student, Collection<Rola> rolaCollection) {
+        this.idKorisnickogNaloga = idKorisnickogNaloga;
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
         this.nastavnik = nastavnik;
         this.student = student;
+        this.rolaCollection = rolaCollection;
+    }
+
+    public BigDecimal getIdKorisnickogNaloga() {
+        return idKorisnickogNaloga;
+    }
+
+    public void setIdKorisnickogNaloga(BigDecimal idKorisnickogNaloga) {
+        this.idKorisnickogNaloga = idKorisnickogNaloga;
     }
 
     public String getKorisnickoIme() {

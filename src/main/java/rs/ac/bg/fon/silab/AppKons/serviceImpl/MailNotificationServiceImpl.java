@@ -27,7 +27,6 @@ public class MailNotificationServiceImpl {
     }
 
     public void sendNotification(String email) throws MailException{
-        System.out.println(email);
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(email);
         mail.setFrom("konsultacije.fon@gmail.com");

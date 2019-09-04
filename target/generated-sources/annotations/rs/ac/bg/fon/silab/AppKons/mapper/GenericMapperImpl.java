@@ -1,6 +1,7 @@
 package rs.ac.bg.fon.silab.AppKons.mapper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import rs.ac.bg.fon.silab.AppKons.dto.NastavnikDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.PokrivenostNastaveDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.PokrivenostNastavePKDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.PredmetDTO;
+import rs.ac.bg.fon.silab.AppKons.dto.PrilogDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.SkolskaGodinaDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.StudentDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.StudentKonsultacijeDTO;
@@ -31,6 +33,7 @@ import rs.ac.bg.fon.silab.AppKons.entities.Nastavnik;
 import rs.ac.bg.fon.silab.AppKons.entities.PokrivenostNastave;
 import rs.ac.bg.fon.silab.AppKons.entities.PokrivenostNastavePK;
 import rs.ac.bg.fon.silab.AppKons.entities.Predmet;
+import rs.ac.bg.fon.silab.AppKons.entities.Prilog;
 import rs.ac.bg.fon.silab.AppKons.entities.Rola;
 import rs.ac.bg.fon.silab.AppKons.entities.SkolskaGodina;
 import rs.ac.bg.fon.silab.AppKons.entities.Student;
@@ -40,7 +43,7 @@ import rs.ac.bg.fon.silab.AppKons.entities.TipDogadjaja;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2019-09-03T12:57:45+0200",
+    date = "2019-09-04T11:05:06+0200",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_181 (Oracle Corporation)"
 )
 @Component
@@ -54,6 +57,7 @@ public class GenericMapperImpl implements GenericMapper {
 
         KorisnickiNalogDTO korisnickiNalogDTO = new KorisnickiNalogDTO();
 
+        korisnickiNalogDTO.setIdKorisnickogNaloga( korisnickiNalog.getIdKorisnickogNaloga() );
         korisnickiNalogDTO.setKorisnickoIme( korisnickiNalog.getKorisnickoIme() );
         korisnickiNalogDTO.setLozinka( korisnickiNalog.getLozinka() );
         korisnickiNalogDTO.setNastavnik( nastavnikToNastavnikDTO( korisnickiNalog.getNastavnik() ) );
@@ -77,6 +81,7 @@ public class GenericMapperImpl implements GenericMapper {
 
         KorisnickiNalog korisnickiNalog = new KorisnickiNalog();
 
+        korisnickiNalog.setIdKorisnickogNaloga( korisnickiNalogDTO.getIdKorisnickogNaloga() );
         korisnickiNalog.setKorisnickoIme( korisnickiNalogDTO.getKorisnickoIme() );
         korisnickiNalog.setLozinka( korisnickiNalogDTO.getLozinka() );
         korisnickiNalog.setNastavnik( nastavnikDTOToNastavnik( korisnickiNalogDTO.getNastavnik() ) );
@@ -384,6 +389,44 @@ public class GenericMapperImpl implements GenericMapper {
         predmetDTO.setGodinaStudija( predmet.getGodinaStudija() );
 
         return predmetDTO;
+    }
+
+    @Override
+    public Prilog prilogDTOToPrilog(PrilogDTO prilogDTO) {
+        if ( prilogDTO == null ) {
+            return null;
+        }
+
+        Prilog prilog = new Prilog();
+
+        prilog.setIdPriloga( prilogDTO.getIdPriloga() );
+        prilog.setNaziv( prilogDTO.getNaziv() );
+        byte[] lokacija = prilogDTO.getLokacija();
+        if ( lokacija != null ) {
+            prilog.setLokacija( Arrays.copyOf( lokacija, lokacija.length ) );
+        }
+        prilog.setStudentKonsultacije( studentKonsultacijeDTOToStudentKonsultacije( prilogDTO.getStudentKonsultacije() ) );
+
+        return prilog;
+    }
+
+    @Override
+    public PrilogDTO prilogToPrilogDTO(Prilog prilog) {
+        if ( prilog == null ) {
+            return null;
+        }
+
+        PrilogDTO prilogDTO = new PrilogDTO();
+
+        prilogDTO.setIdPriloga( prilog.getIdPriloga() );
+        prilogDTO.setNaziv( prilog.getNaziv() );
+        byte[] lokacija = prilog.getLokacija();
+        if ( lokacija != null ) {
+            prilogDTO.setLokacija( Arrays.copyOf( lokacija, lokacija.length ) );
+        }
+        prilogDTO.setStudentKonsultacije( studentKonsultacijeToStudentKonsultacijeDTO( prilog.getStudentKonsultacije() ) );
+
+        return prilogDTO;
     }
 
     @Override

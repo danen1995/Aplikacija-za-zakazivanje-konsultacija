@@ -16,13 +16,13 @@ public class PrilogDTO {
 
     private BigDecimal idPriloga;
     private String naziv;
-    private String lokacija;
+    private byte[] lokacija;
     private StudentKonsultacijeDTO studentKonsultacije;
 
     public PrilogDTO() {
     }
 
-    public PrilogDTO(BigDecimal idPriloga, String naziv, String lokacija, StudentKonsultacijeDTO studentKonsultacije) {
+    public PrilogDTO(BigDecimal idPriloga, String naziv, byte[] lokacija, StudentKonsultacijeDTO studentKonsultacije) {
         this.idPriloga = idPriloga;
         this.naziv = naziv;
         this.lokacija = lokacija;
@@ -45,11 +45,11 @@ public class PrilogDTO {
         this.naziv = naziv;
     }
 
-    public String getLokacija() {
+    public byte[] getLokacija() {
         return lokacija;
     }
 
-    public void setLokacija(String lokacija) {
+    public void setLokacija(byte[] lokacija) {
         this.lokacija = lokacija;
     }
 

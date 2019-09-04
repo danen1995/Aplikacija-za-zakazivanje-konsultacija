@@ -10,7 +10,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import rs.ac.bg.fon.silab.AppKons.dto.KorisnickiNalogDTO;
+import rs.ac.bg.fon.silab.AppKons.dto.NastavnikDTO;
+import rs.ac.bg.fon.silab.AppKons.dto.StudentDTO;
 import rs.ac.bg.fon.silab.AppKons.entities.KorisnickiNalog;
+import rs.ac.bg.fon.silab.AppKons.entities.Nastavnik;
+import rs.ac.bg.fon.silab.AppKons.entities.Student;
 
 /**
  * Next, Let’s define our custom UserDetails class called UserPrincipal. This is
@@ -23,34 +28,35 @@ import rs.ac.bg.fon.silab.AppKons.entities.KorisnickiNalog;
 public class UserPrincipal implements UserDetails {
 
     private BigDecimal id;
-
     private String username;
-
     @JsonIgnore
     private String password;
+    private NastavnikDTO nastavnik;
+    private StudentDTO student;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(BigDecimal id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(BigDecimal id, String username, String password, Collection<? extends GrantedAuthority> authorities, NastavnikDTO nastavnik, StudentDTO student) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
+        this.nastavnik = nastavnik;
+        this.student = student;
     }
 
-    public static UserPrincipal create(KorisnickiNalog user) {
+    public static UserPrincipal create(KorisnickiNalogDTO user) {
         List<GrantedAuthority> authorities = user.getRolaCollection().stream().map(role
                 -> new SimpleGrantedAuthority(role.getNazivRole())
         ).collect(Collectors.toList());
-        
-        System.out.println("DANE123" + authorities.get(0).getAuthority());
-
 
         return new UserPrincipal(
                 user.getIdKorisnickogNaloga(),
                 user.getKorisnickoIme(),
                 user.getLozinka(),
-                authorities
+                authorities,
+                user.getNastavnik(),
+                user.getStudent()
         );
     }
 
@@ -110,6 +116,13 @@ public class UserPrincipal implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
-    
-    
+
+    public NastavnikDTO getNastavnik() {
+        return nastavnik;
+    }
+
+    public StudentDTO getStudent() {
+        return student;
+    }
+
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,6 +19,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,11 +33,11 @@ import rs.ac.bg.fon.silab.AppKons.dao.RolaDAO;
 import rs.ac.bg.fon.silab.AppKons.dto.KorisnickiNalogDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.NastavnikDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.UserDTO;
-import rs.ac.bg.fon.silab.AppKons.entities.KorisnickiNalog;
 import rs.ac.bg.fon.silab.AppKons.entities.Rola;
 import rs.ac.bg.fon.silab.AppKons.exception.AppException;
 import rs.ac.bg.fon.silab.AppKons.payload.ApiResponse;
 import rs.ac.bg.fon.silab.AppKons.payload.JwtAuthenticationResponse;
+import rs.ac.bg.fon.silab.AppKons.security.CurrentUser;
 import rs.ac.bg.fon.silab.AppKons.security.JwtTokenProvider;
 import rs.ac.bg.fon.silab.AppKons.security.UserPrincipal;
 import rs.ac.bg.fon.silab.AppKons.service.KorisnickiNalogService;
@@ -105,10 +107,6 @@ public class KorisnickiNalogRestController {
     @RequestMapping(value = "/allAcounts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     Object findAll() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        System.out.println(authentication.getAuthorities().size());
-        
         List<KorisnickiNalogDTO> nalozi = service.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(nalozi);
     }
@@ -118,4 +116,14 @@ public class KorisnickiNalogRestController {
         return service.tipUsera(korID);
     }
 
+    @GetMapping("/user/me")
+    @PreAuthorize("hasRole('STUDENT')")
+    public KorisnickiNalogDTO getCurrentUser(@CurrentUser UserPrincipal currentUser) {
+        KorisnickiNalogDTO userSummary = new KorisnickiNalogDTO();
+        userSummary.setKorisnickoIme(currentUser.getUsername());
+        userSummary.setLozinka(currentUser.getPassword());
+        userSummary.setNastavnik(currentUser.getNastavnik());
+        userSummary.setStudent(currentUser.getStudent());
+        return userSummary;
+    }
 }

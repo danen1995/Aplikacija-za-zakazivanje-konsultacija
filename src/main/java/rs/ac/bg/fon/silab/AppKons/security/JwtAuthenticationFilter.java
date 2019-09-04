@@ -61,10 +61,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     That would avoid the following database hit. It's completely up to you.
                  */
                 UserDetails userDetails = customUserDetailsService.loadUserById(userId);
-                System.out.println("nakon load user by id" + userDetails.getAuthorities().size());
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                System.out.println("VELICINA je " + authentication.getAuthorities().size());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception ex) {

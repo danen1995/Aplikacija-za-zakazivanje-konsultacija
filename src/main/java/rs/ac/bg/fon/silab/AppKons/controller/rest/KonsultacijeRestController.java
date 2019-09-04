@@ -85,8 +85,6 @@ public class KonsultacijeRestController {
             end.setTime(datumDo);
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
-                System.out.println(date);
-                System.out.println(date.getDay());
                 if (date.getDay() == dan) {
                     lista.add(df.format(date));
                 }

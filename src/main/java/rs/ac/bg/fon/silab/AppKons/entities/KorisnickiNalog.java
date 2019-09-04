@@ -49,9 +49,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "KorisnickiNalog.findAll", query = "SELECT k FROM KorisnickiNalog k")
     ,
-    @NamedQuery(name = "KorisnickiNalog.findByIdKorisnickogNaloga", query = "SELECT k FROM KorisnickiNalog k WHERE k.idKorisnickogNaloga = :idKorisnickogNaloga")
+    @NamedQuery(name = "KorisnickiNalog.findByIdKorisnickogNaloga", query = "SELECT k FROM KorisnickiNalog k WHERE k.idKorisnickogNaloga = ?1")
     ,
-    @NamedQuery(name = "KorisnickiNalog.findByKorisnickoIme", query = "SELECT k FROM KorisnickiNalog k WHERE k.korisnickoIme = :korisnickoIme")
+    @NamedQuery(name = "KorisnickiNalog.findByKorisnickoIme", query = "SELECT k FROM KorisnickiNalog k WHERE k.korisnickoIme = ?1")
     ,
     @NamedQuery(name = "KorisnickiNalog.findByLozinka", query = "SELECT k FROM KorisnickiNalog k WHERE k.lozinka = :lozinka")})
 public class KorisnickiNalog implements Serializable {

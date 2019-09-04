@@ -43,7 +43,6 @@ public class PrilogServiceImpl implements PrilogService {
             return repository.save(p);
 
         } catch (Exception ex) {
-            System.out.println("Greska u dodaj prilog" + ex.getMessage());
             return null;
         }
 
@@ -57,9 +56,9 @@ public class PrilogServiceImpl implements PrilogService {
         }
         return priloziDTO;
     }
-    
-    public Prilog findByStudentKonsultacije(BigInteger idKalendara, BigInteger idDogadjaja, String brojIndeksa){
+
+    public Prilog findByStudentKonsultacije(BigInteger idKalendara, BigInteger idDogadjaja, String brojIndeksa) {
         return repository.findByStudentKonsultacije(idKalendara, idDogadjaja, brojIndeksa);
     }
-    
+
 }
