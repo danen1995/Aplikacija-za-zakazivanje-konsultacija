@@ -35,6 +35,7 @@ import rs.ac.bg.fon.silab.AppKons.dto.NastavnikDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.UserDTO;
 import rs.ac.bg.fon.silab.AppKons.entities.Rola;
 import rs.ac.bg.fon.silab.AppKons.exception.AppException;
+import rs.ac.bg.fon.silab.AppKons.mapper.GenericMapper;
 import rs.ac.bg.fon.silab.AppKons.payload.ApiResponse;
 import rs.ac.bg.fon.silab.AppKons.payload.JwtAuthenticationResponse;
 import rs.ac.bg.fon.silab.AppKons.security.CurrentUser;
@@ -47,6 +48,9 @@ import rs.ac.bg.fon.silab.AppKons.serviceImpl.KorisnickiNalogServiceImpl;
 @CrossOrigin
 @RequestMapping("/api/auth")
 public class KorisnickiNalogRestController {
+
+    @Autowired
+    GenericMapper mapper;
 
     @Autowired
     JwtTokenProvider tokenProvider;
@@ -119,11 +123,6 @@ public class KorisnickiNalogRestController {
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('STUDENT')")
     public KorisnickiNalogDTO getCurrentUser(@CurrentUser UserPrincipal currentUser) {
-        KorisnickiNalogDTO userSummary = new KorisnickiNalogDTO();
-        userSummary.setKorisnickoIme(currentUser.getUsername());
-        userSummary.setLozinka(currentUser.getPassword());
-        userSummary.setNastavnik(currentUser.getNastavnik());
-        userSummary.setStudent(currentUser.getStudent());
-        return userSummary;
+        return mapper.userPrincipalToKorisnickiNalogDTO(currentUser);
     }
 }

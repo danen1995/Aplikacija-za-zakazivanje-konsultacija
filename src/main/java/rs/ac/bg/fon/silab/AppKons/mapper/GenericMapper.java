@@ -7,6 +7,7 @@ package rs.ac.bg.fon.silab.AppKons.mapper;
 
 import java.util.Collection;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import rs.ac.bg.fon.silab.AppKons.dto.ClanstvoKomisijeDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.DogadjajDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.DogadjajPKDTO;
@@ -42,9 +43,20 @@ import rs.ac.bg.fon.silab.AppKons.entities.Student;
 import rs.ac.bg.fon.silab.AppKons.entities.StudentKonsultacije;
 import rs.ac.bg.fon.silab.AppKons.entities.StudentKonsultacijePK;
 import rs.ac.bg.fon.silab.AppKons.entities.TipDogadjaja;
+import rs.ac.bg.fon.silab.AppKons.security.UserPrincipal;
 
 @Mapper(componentModel = "spring")
 public interface GenericMapper {
+
+    @Mapping(target = "idKorisnickogNaloga", source = "id")
+    @Mapping(target = "korisnickoIme", source = "username")
+    @Mapping(target = "lozinka", source = "password")
+    KorisnickiNalogDTO userPrincipalToKorisnickiNalogDTO(UserPrincipal userPrincipal);
+
+    @Mapping(target = "id", source = "idKorisnickogNaloga")
+    @Mapping(target = "username", source = "korisnickoIme")
+    @Mapping(target = "password", source = "lozinka")
+    UserPrincipal korisnickiNalogDTOToUserPrincipal(KorisnickiNalogDTO korisnickiNalogDTO);
 
     KorisnickiNalogDTO korisnickiNalogToKorisnickiNalogDTO(KorisnickiNalog korisnickiNalog);
 

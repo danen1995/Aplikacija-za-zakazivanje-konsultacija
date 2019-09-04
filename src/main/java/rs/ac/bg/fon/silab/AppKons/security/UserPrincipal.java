@@ -36,6 +36,9 @@ public class UserPrincipal implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
+    public UserPrincipal() {
+    }
+
     public UserPrincipal(BigDecimal id, String username, String password, Collection<? extends GrantedAuthority> authorities, NastavnikDTO nastavnik, StudentDTO student) {
         this.id = id;
         this.username = username;
@@ -123,6 +126,30 @@ public class UserPrincipal implements UserDetails {
 
     public StudentDTO getStudent() {
         return student;
+    }
+
+    public void setId(BigDecimal id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setNastavnik(NastavnikDTO nastavnik) {
+        this.nastavnik = nastavnik;
+    }
+
+    public void setStudent(StudentDTO student) {
+        this.student = student;
+    }
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 
 }

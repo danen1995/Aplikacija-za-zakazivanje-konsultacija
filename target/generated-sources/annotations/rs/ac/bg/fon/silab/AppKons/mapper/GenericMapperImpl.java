@@ -40,14 +40,49 @@ import rs.ac.bg.fon.silab.AppKons.entities.Student;
 import rs.ac.bg.fon.silab.AppKons.entities.StudentKonsultacije;
 import rs.ac.bg.fon.silab.AppKons.entities.StudentKonsultacijePK;
 import rs.ac.bg.fon.silab.AppKons.entities.TipDogadjaja;
+import rs.ac.bg.fon.silab.AppKons.security.UserPrincipal;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2019-09-04T11:05:06+0200",
+    date = "2019-09-04T13:22:36+0200",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_181 (Oracle Corporation)"
 )
 @Component
 public class GenericMapperImpl implements GenericMapper {
+
+    @Override
+    public KorisnickiNalogDTO userPrincipalToKorisnickiNalogDTO(UserPrincipal userPrincipal) {
+        if ( userPrincipal == null ) {
+            return null;
+        }
+
+        KorisnickiNalogDTO korisnickiNalogDTO = new KorisnickiNalogDTO();
+
+        korisnickiNalogDTO.setLozinka( userPrincipal.getPassword() );
+        korisnickiNalogDTO.setKorisnickoIme( userPrincipal.getUsername() );
+        korisnickiNalogDTO.setIdKorisnickogNaloga( userPrincipal.getId() );
+        korisnickiNalogDTO.setNastavnik( userPrincipal.getNastavnik() );
+        korisnickiNalogDTO.setStudent( userPrincipal.getStudent() );
+
+        return korisnickiNalogDTO;
+    }
+
+    @Override
+    public UserPrincipal korisnickiNalogDTOToUserPrincipal(KorisnickiNalogDTO korisnickiNalogDTO) {
+        if ( korisnickiNalogDTO == null ) {
+            return null;
+        }
+
+        UserPrincipal userPrincipal = new UserPrincipal();
+
+        userPrincipal.setPassword( korisnickiNalogDTO.getLozinka() );
+        userPrincipal.setId( korisnickiNalogDTO.getIdKorisnickogNaloga() );
+        userPrincipal.setUsername( korisnickiNalogDTO.getKorisnickoIme() );
+        userPrincipal.setNastavnik( korisnickiNalogDTO.getNastavnik() );
+        userPrincipal.setStudent( korisnickiNalogDTO.getStudent() );
+
+        return userPrincipal;
+    }
 
     @Override
     public KorisnickiNalogDTO korisnickiNalogToKorisnickiNalogDTO(KorisnickiNalog korisnickiNalog) {
