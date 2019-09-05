@@ -108,7 +108,7 @@ public class KorisnickiNalogRestController {
 //        return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
 
-    @RequestMapping(value = "/allAcounts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/allAccounts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     Object findAll() {
         List<KorisnickiNalogDTO> nalozi = service.findAll();

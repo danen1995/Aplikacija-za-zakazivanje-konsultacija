@@ -10,12 +10,15 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import rs.ac.bg.fon.silab.AppKons.dto.KorisnickiNalogDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.NastavnikDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.StudentDTO;
 import rs.ac.bg.fon.silab.AppKons.entities.KorisnickiNalog;
 import rs.ac.bg.fon.silab.AppKons.entities.Nastavnik;
+import rs.ac.bg.fon.silab.AppKons.entities.Rola;
 import rs.ac.bg.fon.silab.AppKons.entities.Student;
+import rs.ac.bg.fon.silab.AppKons.mapper.GenericMapper;
 
 /**
  * Next, Let’s define our custom UserDetails class called UserPrincipal. This is
@@ -26,6 +29,9 @@ import rs.ac.bg.fon.silab.AppKons.entities.Student;
  * Here is the complete UserPrincipal class -
  */
 public class UserPrincipal implements UserDetails {
+
+    @Autowired
+    GenericMapper mapper;
 
     private BigDecimal id;
     private String username;
@@ -48,9 +54,10 @@ public class UserPrincipal implements UserDetails {
         this.student = student;
     }
 
-    public static UserPrincipal create(KorisnickiNalogDTO user) {
+    public UserPrincipal create(KorisnickiNalogDTO user) {
+
         List<GrantedAuthority> authorities = user.getRolaCollection().stream().map(role
-                -> new SimpleGrantedAuthority(role.getNazivRole())
+                -> new SimpleGrantedAuthority(((Rola) role).getNazivRole())
         ).collect(Collectors.toList());
 
         return new UserPrincipal(

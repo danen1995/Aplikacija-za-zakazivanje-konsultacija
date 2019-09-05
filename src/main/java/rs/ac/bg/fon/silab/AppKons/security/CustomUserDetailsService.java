@@ -49,7 +49,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(()
                         -> new UsernameNotFoundException("User not found with username : " + username)
                 );
-        return UserPrincipal.create(user);
+        return new UserPrincipal().create(user);
+
     }
 
     @Transactional
@@ -57,6 +58,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         KorisnickiNalogDTO user = service.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("User", "id", id)
         );
-        return UserPrincipal.create(user);
+        return new UserPrincipal().create(user);
     }
 }

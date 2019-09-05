@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.security.core.GrantedAuthority;
 
 /**
  *
@@ -32,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Rola.findAll", query = "SELECT r FROM Rola r")
     , @NamedQuery(name = "Rola.findByIdRole", query = "SELECT r FROM Rola r WHERE r.idRole = :idRole")
     , @NamedQuery(name = "Rola.findByNazivRole", query = "SELECT r FROM Rola r WHERE r.nazivRole = ?1")})
-public class Rola implements Serializable {
+public class Rola implements GrantedAuthority, Serializable {
 
     @Basic(optional = false)
     @NotNull
@@ -99,6 +100,11 @@ public class Rola implements Serializable {
     @Override
     public String toString() {
         return "rs.ac.bg.fon.silab.AppKons.entities.Rola[ idRole=" + idRole + " ]";
+    }
+
+    @Override
+    public String getAuthority() {
+        return nazivRole;
     }
 
 }

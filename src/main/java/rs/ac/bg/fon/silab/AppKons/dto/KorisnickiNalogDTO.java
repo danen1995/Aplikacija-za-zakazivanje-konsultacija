@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 import java.util.Collection;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.security.core.GrantedAuthority;
 import rs.ac.bg.fon.silab.AppKons.entities.Rola;
 
 /**
@@ -26,12 +27,12 @@ public class KorisnickiNalogDTO {
     private String lozinka;
     private NastavnikDTO nastavnik;
     private StudentDTO student;
-    private Collection<Rola> rolaCollection;
+    private Collection<? extends GrantedAuthority> rolaCollection;
 
     public KorisnickiNalogDTO() {
     }
 
-    public KorisnickiNalogDTO(BigDecimal idKorisnickogNaloga, String korisnickoIme, String lozinka, NastavnikDTO nastavnik, StudentDTO student, Collection<Rola> rolaCollection) {
+    public KorisnickiNalogDTO(BigDecimal idKorisnickogNaloga, String korisnickoIme, String lozinka, NastavnikDTO nastavnik, StudentDTO student, Collection<? extends GrantedAuthority> rolaCollection) {
         this.idKorisnickogNaloga = idKorisnickogNaloga;
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
@@ -80,12 +81,13 @@ public class KorisnickiNalogDTO {
         this.student = student;
     }
 
-    @XmlTransient
-    public Collection<Rola> getRolaCollection() {
+    public Collection<? extends GrantedAuthority> getRolaCollection() {
         return rolaCollection;
     }
 
-    public void setRolaCollection(Collection<Rola> rolaCollection) {
+    public void setRolaCollection(Collection<? extends GrantedAuthority> rolaCollection) {
         this.rolaCollection = rolaCollection;
     }
+
+
 }

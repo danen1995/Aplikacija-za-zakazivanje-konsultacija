@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import javax.annotation.Generated;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import rs.ac.bg.fon.silab.AppKons.dto.ClanstvoKomisijeDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.DogadjajDTO;
@@ -44,7 +45,7 @@ import rs.ac.bg.fon.silab.AppKons.security.UserPrincipal;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2019-09-04T13:22:36+0200",
+    date = "2019-09-04T13:50:31+0200",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_181 (Oracle Corporation)"
 )
 @Component
@@ -60,6 +61,13 @@ public class GenericMapperImpl implements GenericMapper {
 
         korisnickiNalogDTO.setLozinka( userPrincipal.getPassword() );
         korisnickiNalogDTO.setKorisnickoIme( userPrincipal.getUsername() );
+        Collection<? extends GrantedAuthority> collection = userPrincipal.getAuthorities();
+        if ( collection != null ) {
+            korisnickiNalogDTO.setRolaCollection( new ArrayList<GrantedAuthority>( collection ) );
+        }
+        else {
+            korisnickiNalogDTO.setRolaCollection( null );
+        }
         korisnickiNalogDTO.setIdKorisnickogNaloga( userPrincipal.getId() );
         korisnickiNalogDTO.setNastavnik( userPrincipal.getNastavnik() );
         korisnickiNalogDTO.setStudent( userPrincipal.getStudent() );
@@ -77,6 +85,13 @@ public class GenericMapperImpl implements GenericMapper {
 
         userPrincipal.setPassword( korisnickiNalogDTO.getLozinka() );
         userPrincipal.setId( korisnickiNalogDTO.getIdKorisnickogNaloga() );
+        Collection<? extends GrantedAuthority> collection = korisnickiNalogDTO.getRolaCollection();
+        if ( collection != null ) {
+            userPrincipal.setAuthorities( new ArrayList<GrantedAuthority>( collection ) );
+        }
+        else {
+            userPrincipal.setAuthorities( null );
+        }
         userPrincipal.setUsername( korisnickiNalogDTO.getKorisnickoIme() );
         userPrincipal.setNastavnik( korisnickiNalogDTO.getNastavnik() );
         userPrincipal.setStudent( korisnickiNalogDTO.getStudent() );
@@ -99,7 +114,7 @@ public class GenericMapperImpl implements GenericMapper {
         korisnickiNalogDTO.setStudent( studentToStudentDTO( korisnickiNalog.getStudent() ) );
         Collection<Rola> collection = korisnickiNalog.getRolaCollection();
         if ( collection != null ) {
-            korisnickiNalogDTO.setRolaCollection( new ArrayList<Rola>( collection ) );
+            korisnickiNalogDTO.setRolaCollection( new ArrayList<GrantedAuthority>( collection ) );
         }
         else {
             korisnickiNalogDTO.setRolaCollection( null );
@@ -121,13 +136,7 @@ public class GenericMapperImpl implements GenericMapper {
         korisnickiNalog.setLozinka( korisnickiNalogDTO.getLozinka() );
         korisnickiNalog.setNastavnik( nastavnikDTOToNastavnik( korisnickiNalogDTO.getNastavnik() ) );
         korisnickiNalog.setStudent( studentDTOToStudent( korisnickiNalogDTO.getStudent() ) );
-        Collection<Rola> collection = korisnickiNalogDTO.getRolaCollection();
-        if ( collection != null ) {
-            korisnickiNalog.setRolaCollection( new ArrayList<Rola>( collection ) );
-        }
-        else {
-            korisnickiNalog.setRolaCollection( null );
-        }
+        korisnickiNalog.setRolaCollection( grantedAuthorityCollectionToRolaCollection( korisnickiNalogDTO.getRolaCollection() ) );
 
         return korisnickiNalog;
     }
@@ -677,5 +686,28 @@ public class GenericMapperImpl implements GenericMapper {
         studentKonsultacijePKDTO.setIdDogadjaja( studentKonsultacijePK.getIdDogadjaja() );
 
         return studentKonsultacijePKDTO;
+    }
+
+    protected Rola grantedAuthorityToRola(GrantedAuthority grantedAuthority) {
+        if ( grantedAuthority == null ) {
+            return null;
+        }
+
+        Rola rola = new Rola();
+
+        return rola;
+    }
+
+    protected Collection<Rola> grantedAuthorityCollectionToRolaCollection(Collection<? extends GrantedAuthority> collection) {
+        if ( collection == null ) {
+            return null;
+        }
+
+        Collection<Rola> collection1 = new ArrayList<Rola>( collection.size() );
+        for ( GrantedAuthority grantedAuthority : collection ) {
+            collection1.add( grantedAuthorityToRola( grantedAuthority ) );
+        }
+
+        return collection1;
     }
 }

@@ -51,11 +51,13 @@ public interface GenericMapper {
     @Mapping(target = "idKorisnickogNaloga", source = "id")
     @Mapping(target = "korisnickoIme", source = "username")
     @Mapping(target = "lozinka", source = "password")
+    @Mapping(target = "rolaCollection", source = "authorities")
     KorisnickiNalogDTO userPrincipalToKorisnickiNalogDTO(UserPrincipal userPrincipal);
 
     @Mapping(target = "id", source = "idKorisnickogNaloga")
     @Mapping(target = "username", source = "korisnickoIme")
     @Mapping(target = "password", source = "lozinka")
+    @Mapping(target = "authorities", source = "rolaCollection")
     UserPrincipal korisnickiNalogDTOToUserPrincipal(KorisnickiNalogDTO korisnickiNalogDTO);
 
     KorisnickiNalogDTO korisnickiNalogToKorisnickiNalogDTO(KorisnickiNalog korisnickiNalog);
