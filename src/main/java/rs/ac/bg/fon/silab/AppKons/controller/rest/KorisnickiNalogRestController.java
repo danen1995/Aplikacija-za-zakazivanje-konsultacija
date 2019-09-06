@@ -2,6 +2,8 @@ package rs.ac.bg.fon.silab.AppKons.controller.rest;
 
 import java.math.BigDecimal;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import javax.validation.Valid;
@@ -15,6 +17,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -97,6 +100,7 @@ public class KorisnickiNalogRestController {
         Rola userRole = rolaRepository.findByNazivRole("ROLE_STUDENT")
                 .orElseThrow(() -> new AppException("User Role not set."));
         korisnickiNalogDTO.setRolaCollection(Collections.singleton(userRole));
+
         korisnickiNalogDTO.setLozinka(passwordEncoder.encode(korisnickiNalogDTO.getLozinka()));
 
         KorisnickiNalogDTO result = service.registrujSe(korisnickiNalogDTO);
@@ -123,6 +127,7 @@ public class KorisnickiNalogRestController {
     @GetMapping("/user/me")
     @PreAuthorize("hasRole('STUDENT')")
     public KorisnickiNalogDTO getCurrentUser(@CurrentUser UserPrincipal currentUser) {
-        return mapper.userPrincipalToKorisnickiNalogDTO(currentUser);
+        return new KorisnickiNalogDTO(currentUser.getId(), currentUser.getUsername(), currentUser.getPassword(), currentUser.getNastavnik(), currentUser.getStudent(), mapper.grantedAuthoritiesToRolas(currentUser.getAuthorities()));
     }
+
 }

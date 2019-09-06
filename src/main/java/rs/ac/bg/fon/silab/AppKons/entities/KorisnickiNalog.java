@@ -163,7 +163,6 @@ public class KorisnickiNalog implements Serializable {
         return "com.diplomski.classes.KorisnickiNalog[ idKorisnickogNaloga=" + idKorisnickogNaloga + " ]";
     }
 
-    @XmlTransient
     public Collection<Rola> getRolaCollection() {
         return rolaCollection;
     }

@@ -8,6 +8,7 @@ package rs.ac.bg.fon.silab.AppKons.mapper;
 import java.util.Collection;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.security.core.GrantedAuthority;
 import rs.ac.bg.fon.silab.AppKons.dto.ClanstvoKomisijeDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.DogadjajDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.DogadjajPKDTO;
@@ -48,17 +49,10 @@ import rs.ac.bg.fon.silab.AppKons.security.UserPrincipal;
 @Mapper(componentModel = "spring")
 public interface GenericMapper {
 
-    @Mapping(target = "idKorisnickogNaloga", source = "id")
-    @Mapping(target = "korisnickoIme", source = "username")
-    @Mapping(target = "lozinka", source = "password")
-    @Mapping(target = "rolaCollection", source = "authorities")
-    KorisnickiNalogDTO userPrincipalToKorisnickiNalogDTO(UserPrincipal userPrincipal);
+    Collection<Rola> grantedAuthoritiesToRolas(Collection<? extends GrantedAuthority> grantedAuthority);
 
-    @Mapping(target = "id", source = "idKorisnickogNaloga")
-    @Mapping(target = "username", source = "korisnickoIme")
-    @Mapping(target = "password", source = "lozinka")
-    @Mapping(target = "authorities", source = "rolaCollection")
-    UserPrincipal korisnickiNalogDTOToUserPrincipal(KorisnickiNalogDTO korisnickiNalogDTO);
+    @Mapping(target = "nazivRole", source = "authority")
+    Rola grantedAuthorityToRola(GrantedAuthority grantedAuthority);
 
     KorisnickiNalogDTO korisnickiNalogToKorisnickiNalogDTO(KorisnickiNalog korisnickiNalog);
 

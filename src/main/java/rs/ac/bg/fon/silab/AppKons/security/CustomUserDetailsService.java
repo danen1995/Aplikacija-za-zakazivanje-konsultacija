@@ -1,6 +1,7 @@
 package rs.ac.bg.fon.silab.AppKons.security;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -55,7 +56,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Transactional
     public UserDetails loadUserById(BigDecimal id) throws Throwable {
-        KorisnickiNalogDTO user = service.findById(id).orElseThrow(
+        Optional<KorisnickiNalogDTO> kndto = service.findByIdKorisnickogNaloga(id);
+        
+        KorisnickiNalogDTO user = service.findByIdKorisnickogNaloga(id).orElseThrow(
                 () -> new ResourceNotFoundException("User", "id", id)
         );
         return new UserPrincipal().create(user);

@@ -42,11 +42,11 @@ public class KorisnickiNalogServiceImpl implements KorisnickiNalogService {
         return Optional.of(mapper.korisnickiNalogToKorisnickiNalogDTO(userDAO.findByKorisnickoIme(korisnickoIme).get()));
     }
 
-    public Optional<KorisnickiNalogDTO> findById(BigDecimal id) {
-        if (!userDAO.findById(id).isPresent()) {
+    public Optional<KorisnickiNalogDTO> findByIdKorisnickogNaloga(BigDecimal id) {
+        if (!userDAO.findByIdKorisnickogNaloga(id).isPresent()) {
             return Optional.empty();
         }
-        return Optional.of(mapper.korisnickiNalogToKorisnickiNalogDTO(userDAO.findById(id).get()));
+        return Optional.of(mapper.korisnickiNalogToKorisnickiNalogDTO(userDAO.findByIdKorisnickogNaloga(id).get()));
     }
 
     public KorisnickiNalogDTO registrujSe(KorisnickiNalogDTO user) {
@@ -76,5 +76,7 @@ public class KorisnickiNalogServiceImpl implements KorisnickiNalogService {
     public Boolean existsByKorisnickoIme(String korisnickoIme) {
         return userDAO.existsByKorisnickoIme(korisnickoIme);
     }
+
+  
 
 }

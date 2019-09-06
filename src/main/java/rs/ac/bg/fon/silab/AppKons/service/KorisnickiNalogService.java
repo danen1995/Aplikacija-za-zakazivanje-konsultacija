@@ -22,7 +22,7 @@ public interface KorisnickiNalogService {
 
     public Optional<KorisnickiNalogDTO> findByKorisnickoIme(String korisnickoIme);
 
-    public Optional<KorisnickiNalogDTO> findById(BigDecimal id);
+    public Optional<KorisnickiNalogDTO> findByIdKorisnickogNaloga(BigDecimal id);
 
     public List<KorisnickiNalogDTO> findAll();
 

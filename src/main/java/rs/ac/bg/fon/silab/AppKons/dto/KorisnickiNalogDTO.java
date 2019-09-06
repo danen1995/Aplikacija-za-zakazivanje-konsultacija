@@ -27,12 +27,12 @@ public class KorisnickiNalogDTO {
     private String lozinka;
     private NastavnikDTO nastavnik;
     private StudentDTO student;
-    private Collection<? extends GrantedAuthority> rolaCollection;
+    private Collection<Rola> rolaCollection;
 
     public KorisnickiNalogDTO() {
     }
 
-    public KorisnickiNalogDTO(BigDecimal idKorisnickogNaloga, String korisnickoIme, String lozinka, NastavnikDTO nastavnik, StudentDTO student, Collection<? extends GrantedAuthority> rolaCollection) {
+    public KorisnickiNalogDTO(BigDecimal idKorisnickogNaloga, String korisnickoIme, String lozinka, NastavnikDTO nastavnik, StudentDTO student, Collection<Rola> rolaCollection) {
         this.idKorisnickogNaloga = idKorisnickogNaloga;
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
@@ -80,12 +80,12 @@ public class KorisnickiNalogDTO {
     public void setStudent(StudentDTO student) {
         this.student = student;
     }
-
-    public Collection<? extends GrantedAuthority> getRolaCollection() {
+    
+    public Collection<Rola> getRolaCollection() {
         return rolaCollection;
     }
 
-    public void setRolaCollection(Collection<? extends GrantedAuthority> rolaCollection) {
+    public void setRolaCollection(Collection<Rola> rolaCollection) {
         this.rolaCollection = rolaCollection;
     }
 

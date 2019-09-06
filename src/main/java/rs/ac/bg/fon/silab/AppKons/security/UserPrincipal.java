@@ -30,9 +30,6 @@ import rs.ac.bg.fon.silab.AppKons.mapper.GenericMapper;
  */
 public class UserPrincipal implements UserDetails {
 
-    @Autowired
-    GenericMapper mapper;
-
     private BigDecimal id;
     private String username;
     @JsonIgnore
@@ -59,6 +56,8 @@ public class UserPrincipal implements UserDetails {
         List<GrantedAuthority> authorities = user.getRolaCollection().stream().map(role
                 -> new SimpleGrantedAuthority(((Rola) role).getNazivRole())
         ).collect(Collectors.toList());
+        
+        
 
         return new UserPrincipal(
                 user.getIdKorisnickogNaloga(),

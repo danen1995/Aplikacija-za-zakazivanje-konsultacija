@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.fon.silab.AppKons.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -33,7 +34,7 @@ import org.springframework.security.core.GrantedAuthority;
     @NamedQuery(name = "Rola.findAll", query = "SELECT r FROM Rola r")
     , @NamedQuery(name = "Rola.findByIdRole", query = "SELECT r FROM Rola r WHERE r.idRole = :idRole")
     , @NamedQuery(name = "Rola.findByNazivRole", query = "SELECT r FROM Rola r WHERE r.nazivRole = ?1")})
-public class Rola implements GrantedAuthority, Serializable {
+public class Rola implements Serializable {
 
     @Basic(optional = false)
     @NotNull
@@ -47,6 +48,7 @@ public class Rola implements GrantedAuthority, Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID_ROLE")
+    @JsonProperty(value = "idRole", access = JsonProperty.Access.WRITE_ONLY)
     private BigDecimal idRole;
 
     public Rola() {
@@ -100,11 +102,6 @@ public class Rola implements GrantedAuthority, Serializable {
     @Override
     public String toString() {
         return "rs.ac.bg.fon.silab.AppKons.entities.Rola[ idRole=" + idRole + " ]";
-    }
-
-    @Override
-    public String getAuthority() {
-        return nazivRole;
     }
 
 }
