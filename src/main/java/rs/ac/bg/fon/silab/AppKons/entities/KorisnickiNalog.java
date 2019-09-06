@@ -25,6 +25,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import rs.ac.bg.fon.silab.AppKons.entities.audit.UserDateAudit;
 
 /**
  *
@@ -49,7 +50,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "KorisnickiNalog.findByKorisnickoIme", query = "SELECT k FROM KorisnickiNalog k WHERE k.korisnickoIme = ?1")
     ,
     @NamedQuery(name = "KorisnickiNalog.findByLozinka", query = "SELECT k FROM KorisnickiNalog k WHERE k.lozinka = :lozinka")})
-public class KorisnickiNalog implements Serializable {
+public class KorisnickiNalog extends UserDateAudit implements Serializable {
 
     @JoinTable(name = "KORISNICKI_NALOG_ROLA", joinColumns = {
         @JoinColumn(name = "KORISNICKI_NALOG_ID", referencedColumnName = "ID_KOR_NAL")}, inverseJoinColumns = {

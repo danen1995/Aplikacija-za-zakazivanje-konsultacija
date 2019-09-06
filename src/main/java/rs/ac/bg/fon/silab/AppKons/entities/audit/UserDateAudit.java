@@ -1,6 +1,7 @@
 package rs.ac.bg.fon.silab.AppKons.entities.audit;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.math.BigDecimal;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 
@@ -9,7 +10,6 @@ import javax.persistence.MappedSuperclass;
 /**
  * Created by rajeevkumarsingh on 19/08/17.
  */
-
 @MappedSuperclass
 @JsonIgnoreProperties(
         value = {"createdBy", "updatedBy"},
@@ -18,24 +18,24 @@ import javax.persistence.MappedSuperclass;
 public abstract class UserDateAudit extends DateAudit {
 
     @CreatedBy
-    private Long createdBy;
+    private BigDecimal createdBy;
 
     @LastModifiedBy
-    private Long updatedBy;
+    private BigDecimal updatedBy;
 
-    public Long getCreatedBy() {
+    public BigDecimal getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(Long createdBy) {
+    public void setCreatedBy(BigDecimal createdBy) {
         this.createdBy = createdBy;
     }
 
-    public Long getUpdatedBy() {
+    public BigDecimal getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(Long updatedBy) {
+    public void setUpdatedBy(BigDecimal updatedBy) {
         this.updatedBy = updatedBy;
     }
 }
