@@ -6,7 +6,6 @@
 package rs.ac.bg.fon.silab.AppKons.dto;
 
 import java.util.Date;
-import rs.ac.bg.fon.silab.AppKons.entities.DogadjajPK;
 
 /**
  *

@@ -5,11 +5,7 @@
  */
 package rs.ac.bg.fon.silab.AppKons.dto;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
-
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -62,5 +58,4 @@ public class KalendarDTO {
 //    public void setDogadjajCollection(Collection<DogadjajDTO> dogadjajCollection) {
 //        this.dogadjajCollection = dogadjajCollection;
 //    }
-
 }

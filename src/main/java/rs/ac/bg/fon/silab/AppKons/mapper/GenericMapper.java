@@ -44,7 +44,6 @@ import rs.ac.bg.fon.silab.AppKons.entities.Student;
 import rs.ac.bg.fon.silab.AppKons.entities.StudentKonsultacije;
 import rs.ac.bg.fon.silab.AppKons.entities.StudentKonsultacijePK;
 import rs.ac.bg.fon.silab.AppKons.entities.TipDogadjaja;
-import rs.ac.bg.fon.silab.AppKons.security.UserPrincipal;
 
 @Mapper(componentModel = "spring")
 public interface GenericMapper {

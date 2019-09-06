@@ -9,18 +9,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rs.ac.bg.fon.silab.AppKons.dto.KorisnickiNalogDTO;
-import rs.ac.bg.fon.silab.AppKons.dto.NastavnikDTO;
-import rs.ac.bg.fon.silab.AppKons.dto.UserDTO;
 import rs.ac.bg.fon.silab.AppKons.entities.KorisnickiNalog;
-import rs.ac.bg.fon.silab.AppKons.entities.Nastavnik;
 import rs.ac.bg.fon.silab.AppKons.mapper.GenericMapper;
 import rs.ac.bg.fon.silab.AppKons.dao.KorisnickiNalogDAO;
-import rs.ac.bg.fon.silab.AppKons.dao.NastavnikDAO;
-import rs.ac.bg.fon.silab.AppKons.dao.StudentDAO;
 import rs.ac.bg.fon.silab.AppKons.service.KorisnickiNalogService;
 
 /**

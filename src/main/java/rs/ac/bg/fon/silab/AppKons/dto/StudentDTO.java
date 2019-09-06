@@ -5,27 +5,11 @@
  */
 package rs.ac.bg.fon.silab.AppKons.dto;
 
-import rs.ac.bg.fon.silab.AppKons.entities.*;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import java.io.Serializable;
-import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-
 /**
  *
  * @author Dane
  */
-public class StudentDTO extends UserDTO{
+public class StudentDTO extends UserDTO {
 
     private String brojIndeksa;
     private String ime;

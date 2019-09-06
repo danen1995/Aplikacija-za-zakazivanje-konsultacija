@@ -5,22 +5,15 @@
  */
 package rs.ac.bg.fon.silab.AppKons.serviceImpl;
 
-import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import rs.ac.bg.fon.silab.AppKons.dto.KonsultacijeDTO;
 import rs.ac.bg.fon.silab.AppKons.dto.PrilogDTO;
-import rs.ac.bg.fon.silab.AppKons.entities.DogadjajPK;
-import rs.ac.bg.fon.silab.AppKons.entities.Konsultacije;
 import rs.ac.bg.fon.silab.AppKons.entities.Prilog;
 import rs.ac.bg.fon.silab.AppKons.mapper.GenericMapper;
-import rs.ac.bg.fon.silab.AppKons.dao.KonsultacijeDAO;
 import rs.ac.bg.fon.silab.AppKons.dao.PrilogDAO;
 import rs.ac.bg.fon.silab.AppKons.entities.StudentKonsultacije;
 import rs.ac.bg.fon.silab.AppKons.service.PrilogService;

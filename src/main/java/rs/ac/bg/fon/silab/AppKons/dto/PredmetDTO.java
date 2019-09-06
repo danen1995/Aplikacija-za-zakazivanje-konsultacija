@@ -5,12 +5,7 @@
  */
 package rs.ac.bg.fon.silab.AppKons.dto;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Collection;
-import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *

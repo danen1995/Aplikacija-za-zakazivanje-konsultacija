@@ -16,8 +16,6 @@ import rs.ac.bg.fon.silab.AppKons.entities.DogadjajPK;
 import rs.ac.bg.fon.silab.AppKons.entities.Konsultacije;
 import rs.ac.bg.fon.silab.AppKons.mapper.GenericMapper;
 import rs.ac.bg.fon.silab.AppKons.dao.KonsultacijeDAO;
-import rs.ac.bg.fon.silab.AppKons.entities.StudentKonsultacijePK;
-import rs.ac.bg.fon.silab.AppKons.service.KalendarService;
 import rs.ac.bg.fon.silab.AppKons.service.KonsultacijeService;
 
 /**

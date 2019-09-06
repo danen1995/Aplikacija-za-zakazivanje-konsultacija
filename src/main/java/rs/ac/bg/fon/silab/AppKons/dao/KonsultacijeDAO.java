@@ -1,6 +1,5 @@
 package rs.ac.bg.fon.silab.AppKons.dao;
 
-import java.awt.print.Pageable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;

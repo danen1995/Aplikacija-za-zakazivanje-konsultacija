@@ -5,7 +5,6 @@
  */
 package rs.ac.bg.fon.silab.AppKons.dto;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**

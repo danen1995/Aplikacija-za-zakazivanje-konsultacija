@@ -4,10 +4,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
-import rs.ac.bg.fon.silab.AppKons.entities.Konsultacije;
 import rs.ac.bg.fon.silab.AppKons.entities.KorisnickiNalog;
-import rs.ac.bg.fon.silab.AppKons.entities.Student;
 
 public interface KorisnickiNalogDAO extends JpaRepository<KorisnickiNalog, BigDecimal> {
 

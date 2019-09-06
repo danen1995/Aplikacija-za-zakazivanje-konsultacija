@@ -6,7 +6,6 @@
 package rs.ac.bg.fon.silab.AppKons.dto;
 
 import java.math.BigInteger;
-import java.util.Collection;
 import java.util.Date;
 
 /**

@@ -5,8 +5,6 @@
  */
 package rs.ac.bg.fon.silab.AppKons.dto;
 
-import java.util.Collection;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *

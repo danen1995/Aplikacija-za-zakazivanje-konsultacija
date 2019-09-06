@@ -5,8 +5,6 @@
  */
 package rs.ac.bg.fon.silab.AppKons.dto;
 
-import rs.ac.bg.fon.silab.AppKons.entities.*;
-import java.math.BigInteger;
 
 /**
  *

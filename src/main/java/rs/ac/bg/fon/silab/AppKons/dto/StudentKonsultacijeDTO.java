@@ -5,9 +5,6 @@
  */
 package rs.ac.bg.fon.silab.AppKons.dto;
 
-import java.math.BigDecimal;
-import java.util.Collection;
-import rs.ac.bg.fon.silab.AppKons.entities.*;
 
 /**
  *

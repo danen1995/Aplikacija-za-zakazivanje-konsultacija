@@ -1,6 +1,5 @@
 package rs.ac.bg.fon.silab.AppKons.controller.rest;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import rs.ac.bg.fon.silab.AppKons.entities.Student;
-import rs.ac.bg.fon.silab.AppKons.serviceImpl.StudentServiceImpl;
-import rs.ac.bg.fon.silab.AppKons.dao.StudentDAO;
 import rs.ac.bg.fon.silab.AppKons.service.StudentService;
 
 @RestController
