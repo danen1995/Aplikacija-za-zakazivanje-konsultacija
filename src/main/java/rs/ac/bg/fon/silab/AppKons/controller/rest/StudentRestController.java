@@ -1,4 +1,4 @@
-package rs.ac.bg.fon.silab.AppKons.controller.rest;
+ package rs.ac.bg.fon.silab.AppKons.controller.rest;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import rs.ac.bg.fon.silab.AppKons.dto.StudentDTO;
 
 
 import rs.ac.bg.fon.silab.AppKons.entities.Student;
@@ -31,7 +32,7 @@ public class StudentRestController {
 
     @GetMapping("/getStudent")
     public @ResponseBody
-    Student vratiStudenta(@RequestParam(value = "brojIndeksa") String brojIndeksa) {
+    StudentDTO vratiStudenta(@RequestParam(value = "brojIndeksa") String brojIndeksa) {
         return service.vratiStudenta(brojIndeksa);
     }
 

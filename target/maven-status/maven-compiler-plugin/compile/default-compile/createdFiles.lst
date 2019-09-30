@@ -17,6 +17,7 @@ rs\ac\bg\fon\silab\AppKons\serviceImpl\KonsultacijeServiceImpl.class
 rs\ac\bg\fon\silab\AppKons\security\JwtAuthenticationEntryPoint.class
 rs\ac\bg\fon\silab\AppKons\entities\SkolskaGodina.class
 rs\ac\bg\fon\silab\AppKons\serviceImpl\MailNotificationServiceImpl.class
+rs\ac\bg\fon\silab\AppKons\config\AuditingConfig.class
 rs\ac\bg\fon\silab\AppKons\AppKonsApplication.class
 rs\ac\bg\fon\silab\AppKons\controller\rest\PokrivenostRestController.class
 rs\ac\bg\fon\silab\AppKons\entities\TipDogadjaja.class
@@ -49,6 +50,7 @@ rs\ac\bg\fon\silab\AppKons\entities\PokrivenostNastavePK.class
 rs\ac\bg\fon\silab\AppKons\entities\Prilog.class
 rs\ac\bg\fon\silab\AppKons\dto\PredmetDTO.class
 rs\ac\bg\fon\silab\AppKons\security\JwtTokenProvider.class
+rs\ac\bg\fon\silab\AppKons\entities\audit\UserDateAudit.class
 rs\ac\bg\fon\silab\AppKons\dto\DogadjajPKDTO.class
 rs\ac\bg\fon\silab\AppKons\dao\StudentKonsultacijeDAO.class
 rs\ac\bg\fon\silab\AppKons\dto\ClanstvoKomisijeDTO.class
@@ -72,11 +74,13 @@ rs\ac\bg\fon\silab\AppKons\dto\StudentDTO.class
 rs\ac\bg\fon\silab\AppKons\dto\KonsultacijeDTO.class
 rs\ac\bg\fon\silab\AppKons\dto\StudentKonsultacijeDTO.class
 rs\ac\bg\fon\silab\AppKons\security\UserPrincipal.class
+rs\ac\bg\fon\silab\AppKons\entities\audit\DateAudit.class
 rs\ac\bg\fon\silab\AppKons\security\JwtAuthenticationFilter.class
 rs\ac\bg\fon\silab\AppKons\exception\AppException.class
 rs\ac\bg\fon\silab\AppKons\security\CurrentUser.class
 rs\ac\bg\fon\silab\AppKons\entities\Dogadjaj.class
 rs\ac\bg\fon\silab\AppKons\entities\Student.class
+rs\ac\bg\fon\silab\AppKons\config\SpringSecurityAuditAwareImpl.class
 rs\ac\bg\fon\silab\AppKons\entities\KorisnickiNalog.class
 rs\ac\bg\fon\silab\AppKons\service\KonsultacijeService.class
 rs\ac\bg\fon\silab\AppKons\serviceImpl\KorisnickiNalogServiceImpl.class

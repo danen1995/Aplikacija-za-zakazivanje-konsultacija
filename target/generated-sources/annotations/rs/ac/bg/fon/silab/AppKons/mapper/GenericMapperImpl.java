@@ -44,7 +44,7 @@ import rs.ac.bg.fon.silab.AppKons.entities.TipDogadjaja;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2019-09-06T11:35:58+0200",
+    date = "2019-09-30T13:53:19+0200",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_181 (Oracle Corporation)"
 )
 @Component

@@ -13,6 +13,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,6 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import rs.ac.bg.fon.silab.AppKons.dao.RolaDAO;
 import rs.ac.bg.fon.silab.AppKons.dto.KorisnickiNalogDTO;
+import rs.ac.bg.fon.silab.AppKons.dto.NastavnikDTO;
+import rs.ac.bg.fon.silab.AppKons.dto.UserDTO;
 import rs.ac.bg.fon.silab.AppKons.entities.Rola;
 import rs.ac.bg.fon.silab.AppKons.exception.AppException;
 import rs.ac.bg.fon.silab.AppKons.mapper.GenericMapper;
@@ -34,6 +38,8 @@ import rs.ac.bg.fon.silab.AppKons.security.CurrentUser;
 import rs.ac.bg.fon.silab.AppKons.security.JwtTokenProvider;
 import rs.ac.bg.fon.silab.AppKons.security.UserPrincipal;
 import rs.ac.bg.fon.silab.AppKons.service.KorisnickiNalogService;
+import rs.ac.bg.fon.silab.AppKons.service.NastavnikService;
+import rs.ac.bg.fon.silab.AppKons.service.StudentService;
 
 @RestController
 @CrossOrigin
@@ -57,6 +63,12 @@ public class KorisnickiNalogRestController {
 
     @Autowired
     AuthenticationManager authenticationManager;
+
+    @Autowired
+    NastavnikService nastavnikService;
+
+    @Autowired
+    StudentService studentService;
 
     @CrossOrigin
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
@@ -103,9 +115,22 @@ public class KorisnickiNalogRestController {
         return service.tipUsera(korID);
     }
 
+//    @GetMapping("/user/me")
+//    @PreAuthorize("hasRole('STUDENT')")
+//    public KorisnickiNalogDTO getCurrentUser(@CurrentUser UserPrincipal currentUser) {
+//        return new KorisnickiNalogDTO(currentUser.getId(), currentUser.getUsername(), currentUser.getPassword(), currentUser.getNastavnik(), currentUser.getStudent(), mapper.grantedAuthoritiesToRolas(currentUser.getAuthorities()));
+//    }
     @GetMapping("/user/me")
-    @PreAuthorize("hasRole('STUDENT')")
-    public KorisnickiNalogDTO getCurrentUser(@CurrentUser UserPrincipal currentUser) {
-        return new KorisnickiNalogDTO(currentUser.getId(), currentUser.getUsername(), currentUser.getPassword(), currentUser.getNastavnik(), currentUser.getStudent(), mapper.grantedAuthoritiesToRolas(currentUser.getAuthorities()));
+    public @ResponseBody
+    Object getUserProfile(@CurrentUser UserPrincipal currentUser) {
+        for (GrantedAuthority permission : currentUser.getAuthorities()) {
+            if (permission.getAuthority().equals("ROLE_STUDENT")) {
+                return ResponseEntity.status(HttpStatus.OK).body(studentService.vratiStudenta(currentUser.getStudent().getBrojIndeksa()));
+            }
+            if (permission.getAuthority().equals("ROLE_NASTAVNIK")) {
+                return ResponseEntity.status(HttpStatus.OK).body(nastavnikService.vratiNastavnika(currentUser.getNastavnik().getJmbg()));
+            }
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Doslo je do greske. Nalogu nije dodeljen student ili nastavnik.");
     }
 }
