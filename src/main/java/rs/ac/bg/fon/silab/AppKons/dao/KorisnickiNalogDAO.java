@@ -18,4 +18,7 @@ public interface KorisnickiNalogDAO extends JpaRepository<KorisnickiNalog, BigDe
     @Query("select case when count(c)> 0 then true else false end from KorisnickiNalog c where lower(c.korisnickoIme) like lower(?1)")
     public Boolean existsByKorisnickoIme(String korisnickoIme);
 
+    @Query("select case when count(c)> 0 then true else false end from KorisnickiNalog c where lower(c.student.brojIndeksa) like lower(?1)")
+    public Boolean existsByBrojIndeksa(String brojIndeksa);
+
 }

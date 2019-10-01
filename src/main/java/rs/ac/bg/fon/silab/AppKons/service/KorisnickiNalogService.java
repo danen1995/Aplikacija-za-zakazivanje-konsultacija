@@ -28,4 +28,6 @@ public interface KorisnickiNalogService {
 
     public Boolean existsByKorisnickoIme(String korisnickoIme);
 
+    public boolean studentAlreadyRegistered(String brojIndeksa);
+
 }

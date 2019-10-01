@@ -71,6 +71,8 @@ public class KorisnickiNalogServiceImpl implements KorisnickiNalogService {
         return userDAO.existsByKorisnickoIme(korisnickoIme);
     }
 
-  
+    public boolean studentAlreadyRegistered(String brojIndeksa) {
+        return userDAO.existsByBrojIndeksa(brojIndeksa);
+    }
 
 }

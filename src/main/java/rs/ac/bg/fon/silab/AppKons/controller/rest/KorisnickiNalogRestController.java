@@ -91,6 +91,11 @@ public class KorisnickiNalogRestController {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
+        if (service.studentAlreadyRegistered(korisnickiNalogDTO.getStudent().getBrojIndeksa())) {
+            return new ResponseEntity(new ApiResponse(false, "Student already registered! Please log in!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+        
         Rola userRole = rolaRepository.findByNazivRole("ROLE_STUDENT")
                 .orElseThrow(() -> new AppException("User Role not set."));
         korisnickiNalogDTO.setRolaCollection(Collections.singleton(userRole));
