@@ -69,17 +69,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>ojdbc</groupId>
-            <artifactId>ojdbc</artifactId>
-            <version>14</version>
-            <scope>runtime</scope>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>com.github.noraui</groupId>
+            <groupId>com.oracle</groupId>
             <artifactId>ojdbc7</artifactId>
-            <version>12.1.0.2</version>
-            <scope>runtime</scope>
+            <version>12.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
