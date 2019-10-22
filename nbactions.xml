@@ -10,7 +10,7 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
             </goals>
             <properties>
-                <exec.args>-classpath %classpath rs.ac.bg.fon.silab.AppKons.AppKonsApplication</exec.args>
+                <exec.args>-classpath %classpath rs.ac.bg.fon.silab.AppSchSys.AppSchSysApplication</exec.args>
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
