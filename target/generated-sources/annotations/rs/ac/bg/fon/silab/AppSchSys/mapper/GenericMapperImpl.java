@@ -1,8 +1,10 @@
 package rs.ac.bg.fon.silab.AppSchSys.mapper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import javax.annotation.Generated;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import rs.ac.bg.fon.silab.AppSchSys.dto.AttachmentDTO;
@@ -40,22 +42,22 @@ import rs.ac.bg.fon.silab.AppSchSys.entities.Teacher;
 import rs.ac.bg.fon.silab.AppSchSys.entities.UserAccount;
 
 @Generated(
-    value = "org.mapstruct.ap.MappingProcessor",
-    date = "2019-10-19T12:43:08+0200",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_181 (Oracle Corporation)"
+        value = "org.mapstruct.ap.MappingProcessor",
+        date = "2019-12-23T09:23:11+0100",
+        comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_181 (Oracle Corporation)"
 )
 @Component
 public class GenericMapperImpl implements GenericMapper {
 
     @Override
     public Collection<Role> grantedAuthoritiesToROLEs(Collection<? extends GrantedAuthority> grantedAuthority) {
-        if ( grantedAuthority == null ) {
+        if (grantedAuthority == null) {
             return null;
         }
 
-        Collection<Role> collection = new ArrayList<Role>( grantedAuthority.size() );
-        for ( GrantedAuthority grantedAuthority1 : grantedAuthority ) {
-            collection.add( grantedAuthorityToROLE( grantedAuthority1 ) );
+        Collection<Role> collection = new ArrayList<Role>(grantedAuthority.size());
+        for (GrantedAuthority grantedAuthority1 : grantedAuthority) {
+            collection.add(grantedAuthorityToROLE(grantedAuthority1));
         }
 
         return collection;
@@ -63,36 +65,32 @@ public class GenericMapperImpl implements GenericMapper {
 
     @Override
     public Role grantedAuthorityToROLE(GrantedAuthority grantedAuthority) {
-        if ( grantedAuthority == null ) {
+        if (grantedAuthority == null) {
             return null;
         }
-
         Role role = new Role();
-
-        role.setRoleName( grantedAuthority.getAuthority() );
-
+        role.setRoleName(grantedAuthority.getAuthority());
         return role;
     }
 
     @Override
     public UserAccountDTO userAccountToUserAccountDTO(UserAccount UserAccount) {
-        if ( UserAccount == null ) {
+        if (UserAccount == null) {
             return null;
         }
 
         UserAccountDTO userAccountDTO = new UserAccountDTO();
 
-        userAccountDTO.setUserAccountId( UserAccount.getUserAccountId() );
-        userAccountDTO.setUserName( UserAccount.getUserName() );
-        userAccountDTO.setPassword( UserAccount.getPassword() );
-        userAccountDTO.setTeacher( teacherToteacherDTO( UserAccount.getTeacher() ) );
-        userAccountDTO.setStudent( studentToStudentDTO( UserAccount.getStudent() ) );
+        userAccountDTO.setUserAccountId(UserAccount.getUserAccountId());
+        userAccountDTO.setUserName(UserAccount.getUserName());
+        userAccountDTO.setPassword(UserAccount.getPassword());
+        userAccountDTO.setTeacher(teacherToteacherDTO(UserAccount.getTeacher()));
+        userAccountDTO.setStudent(studentToStudentDTO(UserAccount.getStudent()));
         Collection<Role> collection = UserAccount.getRolеCollection();
-        if ( collection != null ) {
-            userAccountDTO.setRolеCollection( new ArrayList<Role>( collection ) );
-        }
-        else {
-            userAccountDTO.setRolеCollection( null );
+        if (collection != null) {
+            userAccountDTO.setRolеCollection(new ArrayList<Role>(collection));
+        } else {
+            userAccountDTO.setRolеCollection(null);
         }
 
         return userAccountDTO;
@@ -100,260 +98,263 @@ public class GenericMapperImpl implements GenericMapper {
 
     @Override
     public UserAccount userAccountDTOToUserAccount(UserAccountDTO UserAccountDTO) {
-        if ( UserAccountDTO == null ) {
+        if (UserAccountDTO == null) {
             return null;
         }
 
         UserAccount userAccount = new UserAccount();
 
         Collection<Role> collection = UserAccountDTO.getRolеCollection();
-        if ( collection != null ) {
-            userAccount.setRolеCollection( new ArrayList<Role>( collection ) );
+        if (collection != null) {
+            userAccount.setRolеCollection(new ArrayList<Role>(collection));
+        } else {
+            userAccount.setRolеCollection(null);
         }
-        else {
-            userAccount.setRolеCollection( null );
-        }
-        userAccount.setUserAccountId( UserAccountDTO.getUserAccountId() );
-        userAccount.setUserName( UserAccountDTO.getUserName() );
-        userAccount.setPassword( UserAccountDTO.getPassword() );
-        userAccount.setTeacher( teacherDTOToteacher( UserAccountDTO.getTeacher() ) );
-        userAccount.setStudent( studentDTOToStudent( UserAccountDTO.getStudent() ) );
+        userAccount.setUserAccountId(UserAccountDTO.getUserAccountId());
+        userAccount.setUserName(UserAccountDTO.getUserName());
+        userAccount.setPassword(UserAccountDTO.getPassword());
+        userAccount.setTeacher(teacherDTOToteacher(UserAccountDTO.getTeacher()));
+        userAccount.setStudent(studentDTOToStudent(UserAccountDTO.getStudent()));
 
         return userAccount;
     }
 
     @Override
     public Student studentDTOToStudent(StudentDTO studentDTO) {
-        if ( studentDTO == null ) {
+        if (studentDTO == null) {
             return null;
         }
 
         Student student = new Student();
 
-        student.setIndexNumber( studentDTO.getIndexNumber() );
-        student.setFirstName( studentDTO.getFirstName() );
-        student.setLastName( studentDTO.getLastName() );
-        student.setYearOfEntry( studentDTO.getYearOfEntry() );
-        student.setDepartment( studentDTO.getDepartment() );
-        student.setTelephone( studentDTO.getTelephone() );
-        student.setEmail( studentDTO.getEmail() );
+        student.setIndexNumber(studentDTO.getIndexNumber());
+        student.setFirstName(studentDTO.getFirstName());
+        student.setLastName(studentDTO.getLastName());
+        student.setYearOfEntry(studentDTO.getYearOfEntry());
+        student.setDepartment(studentDTO.getDepartment());
+        student.setTelephone(studentDTO.getTelephone());
+        student.setEmail(studentDTO.getEmail());
 
         return student;
     }
 
     @Override
     public StudentDTO studentToStudentDTO(Student student) {
-        if ( student == null ) {
+        if (student == null) {
             return null;
         }
 
         StudentDTO studentDTO = new StudentDTO();
 
-        studentDTO.setIndexNumber( student.getIndexNumber() );
-        studentDTO.setFirstName( student.getFirstName() );
-        studentDTO.setLastName( student.getLastName() );
-        studentDTO.setYearOfEntry( student.getYearOfEntry() );
-        studentDTO.setDepartment( student.getDepartment() );
-        studentDTO.setTelephone( student.getTelephone() );
-        studentDTO.setEmail( student.getEmail() );
+        studentDTO.setIndexNumber(student.getIndexNumber());
+        studentDTO.setFirstName(student.getFirstName());
+        studentDTO.setLastName(student.getLastName());
+        studentDTO.setYearOfEntry(student.getYearOfEntry());
+        studentDTO.setDepartment(student.getDepartment());
+        studentDTO.setTelephone(student.getTelephone());
+        studentDTO.setEmail(student.getEmail());
 
         return studentDTO;
     }
 
     @Override
     public Course courseDTOToCourse(CourseDTO courseDTO) {
-        if ( courseDTO == null ) {
+        if (courseDTO == null) {
             return null;
         }
 
         Course course = new Course();
 
-        course.setEventPK( eventPKDTOToeventPK( courseDTO.getEventPK() ) );
-        course.setStartDateTime( courseDTO.getStartDateTime() );
-        course.setEndDateTime( courseDTO.getEndDateTime() );
-        course.setPlace( courseDTO.getPlace() );
-        course.setCalendar( calendarDTOToCalendar( courseDTO.getCalendar() ) );
-        course.setEventTypeId( eventTypeDTOToEventType( courseDTO.getEventTypeId() ) );
-        course.setSubjectId( subjectDTOToSubject( courseDTO.getsubjectId() ) );
+        course.setEventPK(eventPKDTOToeventPK(courseDTO.getEventPK()));
+        course.setStartDateTime(courseDTO.getStartDateTime());
+        course.setEndDateTime(courseDTO.getEndDateTime());
+        course.setPlace(courseDTO.getPlace());
+        course.setCalendar(calendarDTOToCalendar(courseDTO.getCalendar()));
+        course.setEventTypeId(eventTypeDTOToEventType(courseDTO.getEventTypeId()));
+        course.setSubjectId(subjectDTOToSubject(courseDTO.getsubjectId()));
 
         return course;
     }
 
     @Override
     public CourseDTO courseToCourseDTO(Course course) {
-        if ( course == null ) {
+        if (course == null) {
             return null;
         }
 
         CourseDTO courseDTO = new CourseDTO();
 
-        courseDTO.setEventPK( eventPKToeventPKDTO( course.getEventPK() ) );
-        courseDTO.setStartDateTime( course.getStartDateTime() );
-        courseDTO.setEndDateTime( course.getEndDateTime() );
-        courseDTO.setPlace( course.getPlace() );
-        courseDTO.setCalendar( calendarToCalendarDTO( course.getCalendar() ) );
-        courseDTO.setEventTypeId( eventTypeToEventTypeDTO( course.getEventTypeId() ) );
-        courseDTO.setsubjectId( subjectToSubjectDTO( course.getSubjectId() ) );
+        courseDTO.setEventPK(eventPKToeventPKDTO(course.getEventPK()));
+        courseDTO.setStartDateTime(course.getStartDateTime());
+        courseDTO.setEndDateTime(course.getEndDateTime());
+        courseDTO.setPlace(course.getPlace());
+        courseDTO.setCalendar(calendarToCalendarDTO(course.getCalendar()));
+        courseDTO.setEventTypeId(eventTypeToEventTypeDTO(course.getEventTypeId()));
+        courseDTO.setsubjectId(subjectToSubjectDTO(course.getSubjectId()));
 
         return courseDTO;
     }
 
     @Override
     public Teacher teacherDTOToteacher(TeacherDTO teacherDTO) {
-        if ( teacherDTO == null ) {
+        if (teacherDTO == null) {
             return null;
         }
 
         Teacher teacher = new Teacher();
 
-        teacher.setTeacherId( teacherDTO.getTeacherId() );
-        teacher.setFirstName( teacherDTO.getFirstName() );
-        teacher.setLastName( teacherDTO.getLastName() );
-        teacher.setEmail( teacherDTO.getEmail() );
-        teacher.setTelephone( teacherDTO.getTelephone() );
-        teacher.setCabinet( teacherDTO.getCabinet() );
-        teacher.setImage( teacherDTO.getImage() );
+        teacher.setTeacherId(teacherDTO.getTeacherId());
+        teacher.setFirstName(teacherDTO.getFirstName());
+        teacher.setLastName(teacherDTO.getLastName());
+        teacher.setEmail(teacherDTO.getEmail());
+        teacher.setTelephone(teacherDTO.getTelephone());
+        teacher.setCabinet(teacherDTO.getCabinet());
+        teacher.setImage(teacherDTO.getImage());
 
         return teacher;
     }
 
     @Override
     public TeacherDTO teacherToteacherDTO(Teacher teacher) {
-        if ( teacher == null ) {
+        if (teacher == null) {
             return null;
         }
 
         TeacherDTO teacherDTO = new TeacherDTO();
 
-        teacherDTO.setTeacherId( teacher.getTeacherId() );
-        teacherDTO.setFirstName( teacher.getFirstName() );
-        teacherDTO.setLastName( teacher.getLastName() );
-        teacherDTO.setEmail( teacher.getEmail() );
-        teacherDTO.setTelephone( teacher.getTelephone() );
-        teacherDTO.setCabinet( teacher.getCabinet() );
-        teacherDTO.setImage( teacher.getImage() );
+        teacherDTO.setTeacherId(teacher.getTeacherId());
+        teacherDTO.setFirstName(teacher.getFirstName());
+        teacherDTO.setLastName(teacher.getLastName());
+        teacherDTO.setEmail(teacher.getEmail());
+        teacherDTO.setTelephone(teacher.getTelephone());
+        teacherDTO.setCabinet(teacher.getCabinet());
+        teacherDTO.setImage(teacher.getImage());
 
         return teacherDTO;
     }
 
     @Override
     public ConsultationDTO ConsultationToConsultationDTO(Consultation Consultation) {
-        if ( Consultation == null ) {
+        if (Consultation == null) {
             return null;
         }
 
         ConsultationDTO consultationDTO = new ConsultationDTO();
 
-        consultationDTO.setEventPK( eventPKToeventPKDTO( Consultation.getEventPK() ) );
-        consultationDTO.setStartDateTime( Consultation.getStartDateTime() );
-        consultationDTO.setEndDateTime( Consultation.getEndDateTime() );
-        consultationDTO.setPlace( Consultation.getPlace() );
-        consultationDTO.setCalendar( calendarToCalendarDTO( Consultation.getCalendar() ) );
-        consultationDTO.setEventTypeId( eventTypeToEventTypeDTO( Consultation.getEventTypeId() ) );
-        consultationDTO.setCapacity( Consultation.getCapacity() );
-        consultationDTO.setNumberOfScheduledCons( Consultation.getNumberOfScheduledCons() );
+        consultationDTO.setEventPK(eventPKToeventPKDTO(Consultation.getEventPK()));
+        consultationDTO.setStartDateTime(Consultation.getStartDateTime());
+        consultationDTO.setEndDateTime(Consultation.getEndDateTime());
+        consultationDTO.setPlace(Consultation.getPlace());
+        consultationDTO.setCalendar(calendarToCalendarDTO(Consultation.getCalendar()));
+        consultationDTO.setEventTypeId(eventTypeToEventTypeDTO(Consultation.getEventTypeId()));
+        consultationDTO.setCapacity(Consultation.getCapacity());
+        consultationDTO.setNumberOfScheduledCons(Consultation.getNumberOfScheduledCons());
 
         return consultationDTO;
     }
 
     @Override
     public Consultation ConsultationDTOToConsultation(ConsultationDTO ConsultationDTO) {
-        if ( ConsultationDTO == null ) {
+        if (ConsultationDTO == null) {
             return null;
         }
 
         Consultation consultation = new Consultation();
 
-        consultation.setEventPK( eventPKDTOToeventPK( ConsultationDTO.getEventPK() ) );
-        consultation.setStartDateTime( ConsultationDTO.getStartDateTime() );
-        consultation.setEndDateTime( ConsultationDTO.getEndDateTime() );
-        consultation.setPlace( ConsultationDTO.getPlace() );
-        consultation.setCalendar( calendarDTOToCalendar( ConsultationDTO.getCalendar() ) );
-        consultation.setEventTypeId( eventTypeDTOToEventType( ConsultationDTO.getEventTypeId() ) );
-        consultation.setCapacity( ConsultationDTO.getCapacity() );
-        consultation.setNumberOfScheduledCons( ConsultationDTO.getNumberOfScheduledCons() );
+        consultation.setEventPK(eventPKDTOToeventPK(ConsultationDTO.getEventPK()));
+        consultation.setStartDateTime(ConsultationDTO.getStartDateTime());
+        consultation.setEndDateTime(ConsultationDTO.getEndDateTime());
+        consultation.setPlace(ConsultationDTO.getPlace());
+        consultation.setCalendar(calendarDTOToCalendar(ConsultationDTO.getCalendar()));
+        consultation.setEventTypeId(eventTypeDTOToEventType(ConsultationDTO.getEventTypeId()));
+        consultation.setCapacity(ConsultationDTO.getCapacity());
+        consultation.setNumberOfScheduledCons(ConsultationDTO.getNumberOfScheduledCons());
 
         return consultation;
     }
 
     @Override
     public Event eventDTOToEvent(EventDTO eventDTO) {
-        if ( eventDTO == null ) {
+        if (eventDTO == null) {
             return null;
         }
 
         Event event = new Event();
 
-        event.setEventPK( eventPKDTOToeventPK( eventDTO.getEventPK() ) );
-        event.setStartDateTime( eventDTO.getStartDateTime() );
-        event.setEndDateTime( eventDTO.getEndDateTime() );
-        event.setPlace( eventDTO.getPlace() );
-        event.setCalendar( calendarDTOToCalendar( eventDTO.getCalendar() ) );
-        event.setEventTypeId( eventTypeDTOToEventType( eventDTO.getEventTypeId() ) );
+        event.setEventPK(eventPKDTOToeventPK(eventDTO.getEventPK()));
+        event.setStartDateTime(eventDTO.getStartDateTime());
+        event.setEndDateTime(eventDTO.getEndDateTime());
+        event.setPlace(eventDTO.getPlace());
+        event.setCalendar(calendarDTOToCalendar(eventDTO.getCalendar()));
+        event.setEventTypeId(eventTypeDTOToEventType(eventDTO.getEventTypeId()));
 
         return event;
     }
 
     @Override
     public EventDTO eventToEventDTO(Event event) {
-        if ( event == null ) {
+        if (event == null) {
             return null;
         }
 
         EventDTO eventDTO = new EventDTO();
 
-        eventDTO.setEventPK( eventPKToeventPKDTO( event.getEventPK() ) );
-        eventDTO.setStartDateTime( event.getStartDateTime() );
-        eventDTO.setEndDateTime( event.getEndDateTime() );
-        eventDTO.setPlace( event.getPlace() );
-        eventDTO.setCalendar( calendarToCalendarDTO( event.getCalendar() ) );
-        eventDTO.setEventTypeId( eventTypeToEventTypeDTO( event.getEventTypeId() ) );
+        eventDTO.setEventPK(eventPKToeventPKDTO(event.getEventPK()));
+        eventDTO.setStartDateTime(event.getStartDateTime());
+        eventDTO.setEndDateTime(event.getEndDateTime());
+        eventDTO.setPlace(event.getPlace());
+        eventDTO.setCalendar(calendarToCalendarDTO(event.getCalendar()));
+        eventDTO.setEventTypeId(eventTypeToEventTypeDTO(event.getEventTypeId()));
 
         return eventDTO;
     }
 
     @Override
     public EventPK eventPKDTOToeventPK(EventPKDTO eventPKDTO) {
-        if ( eventPKDTO == null ) {
+        if (eventPKDTO == null) {
             return null;
         }
 
         EventPK eventPK = new EventPK();
 
-        eventPK.setCalendarId( eventPKDTO.getcalendarId() );
-        eventPK.setEventId( eventPKDTO.geteventId() );
+        eventPK.setCalendarId(eventPKDTO.getcalendarId());
+        eventPK.setEventId(eventPKDTO.geteventId());
 
         return eventPK;
     }
 
     @Override
     public EventPKDTO eventPKToeventPKDTO(EventPK eventPK) {
-        if ( eventPK == null ) {
+        if (eventPK == null) {
             return null;
         }
 
         EventPKDTO eventPKDTO = new EventPKDTO();
 
-        eventPKDTO.seteventId( eventPK.getEventId() );
-        eventPKDTO.setcalendarId( eventPK.getCalendarId() );
+        eventPKDTO.seteventId(eventPK.getEventId());
+        eventPKDTO.setcalendarId(eventPK.getCalendarId());
 
         return eventPKDTO;
     }
 
     @Override
     public Subject subjectDTOToSubject(SubjectDTO subjectDTO) {
-        if ( subjectDTO == null ) {
+        if (subjectDTO == null) {
             return null;
         }
 
         Subject subject = new Subject();
+
+        subject.setName(subjectDTO.getName());
+        subject.setEspb(subjectDTO.getEspb());
+        subject.setYearOfStudies(subjectDTO.getYearOfStudies());
 
         return subject;
     }
 
     @Override
     public SubjectDTO subjectToSubjectDTO(Subject subject) {
-        if ( subject == null ) {
+        if (subject == null) {
             return null;
         }
 
@@ -364,91 +365,107 @@ public class GenericMapperImpl implements GenericMapper {
 
     @Override
     public Attachment attachmentDTOToAttachment(AttachmentDTO attachmentDTO) {
-        if ( attachmentDTO == null ) {
+        if (attachmentDTO == null) {
             return null;
         }
 
         Attachment attachment = new Attachment();
+
+        attachment.setAttachmentId(attachmentDTO.getAttachmentId());
+        attachment.setName(attachmentDTO.getName());
+        byte[] location = attachmentDTO.getLocation();
+        if (location != null) {
+            attachment.setLocation(Arrays.copyOf(location, location.length));
+        }
+        attachment.setScheduledConsultation(scheduledConsultationDTOToStudentConsultation(attachmentDTO.getScheduledConsultation()));
 
         return attachment;
     }
 
     @Override
     public AttachmentDTO attachmentTOAttachmentDTO(Attachment attachment) {
-        if ( attachment == null ) {
+        if (attachment == null) {
             return null;
         }
 
         AttachmentDTO attachmentDTO = new AttachmentDTO();
+
+        attachmentDTO.setAttachmentId(attachment.getAttachmentId());
+        attachmentDTO.setName(attachment.getName());
+        byte[] location = attachment.getLocation();
+        if (location != null) {
+            attachmentDTO.setLocation(Arrays.copyOf(location, location.length));
+        }
+        attachmentDTO.setScheduledConsultation(scheduledConsultationToStudentConsultationDTO(attachment.getScheduledConsultation()));
 
         return attachmentDTO;
     }
 
     @Override
     public Calendar calendarDTOToCalendar(CalendarDTO calendarDTO) {
-        if ( calendarDTO == null ) {
+        if (calendarDTO == null) {
             return null;
         }
 
         Calendar calendar = new Calendar();
 
-        calendar.setCalendarId( calendarDTO.getCalendarId() );
-        calendar.setSchoolYearId( schoolYearDTOToSchoolYear( calendarDTO.getSchoolYearId() ) );
+        calendar.setCalendarId(calendarDTO.getCalendarId());
+        calendar.setSchoolYearId(schoolYearDTOToSchoolYear(calendarDTO.getSchoolYearId()));
 
         return calendar;
     }
 
     @Override
     public CalendarDTO calendarToCalendarDTO(Calendar calendar) {
-        if ( calendar == null ) {
+        if (calendar == null) {
             return null;
         }
 
         CalendarDTO calendarDTO = new CalendarDTO();
 
-        calendarDTO.setCalendarId( calendar.getCalendarId() );
-        calendarDTO.setSchoolYearId( schoolYearToSchoolYearDTO( calendar.getSchoolYearId() ) );
+        calendarDTO.setCalendarId(calendar.getCalendarId());
+        calendarDTO.setSchoolYearId(schoolYearToSchoolYearDTO(calendar.getSchoolYearId()));
 
         return calendarDTO;
     }
 
     @Override
     public Coverage coverageDTOToCoverage(CoverageDTO coverageDTO) {
-        if ( coverageDTO == null ) {
+        if (coverageDTO == null) {
             return null;
         }
 
         Coverage coverage = new Coverage();
 
-        coverage.setCoveragePK( coveragePKDToTocoveragePK( coverageDTO.getCoveragePK() ) );
-        coverage.setFunction( coverageDTO.getFunction() );
-        coverage.setTeacher( teacherDTOToteacher( coverageDTO.getTeacher() ) );
-        coverage.setSubject( subjectDTOToSubject( coverageDTO.getSubject() ) );
-        coverage.setSchoolYearId( schoolYearDTOToSchoolYear( coverageDTO.getSchoolYearId() ) );
+        coverage.setCoveragePK(coveragePKDToTocoveragePK(coverageDTO.getCoveragePK()));
+        coverage.setFunction(coverageDTO.getFunction());
+        coverage.setTeacher(teacherDTOToteacher(coverageDTO.getTeacher()));
+        coverage.setSubject(subjectDTOToSubject(coverageDTO.getSubject()));
+        coverage.setSchoolYearId(schoolYearDTOToSchoolYear(coverageDTO.getSchoolYearId()));
 
         return coverage;
     }
 
     @Override
     public CoverageDTO coverageToCoverageDTO(Coverage coverage) {
-        if ( coverage == null ) {
+        if (coverage == null) {
             return null;
         }
 
         CoverageDTO coverageDTO = new CoverageDTO();
 
-        coverageDTO.setCoveragePK( coveragePKToCoveragePKDTO( coverage.getCoveragePK() ) );
-        coverageDTO.setFunction( coverage.getFunction() );
-        coverageDTO.setTeacher( teacherToteacherDTO( coverage.getTeacher() ) );
-        coverageDTO.setSubject( subjectToSubjectDTO( coverage.getSubject() ) );
-        coverageDTO.setSchoolYearId( schoolYearToSchoolYearDTO( coverage.getSchoolYearId() ) );
+        coverageDTO.setCoveragePK(coveragePKToCoveragePKDTO(coverage.getCoveragePK()));
+        coverageDTO.setFunction(coverage.getFunction());
+        coverageDTO.setTeacher(teacherToteacherDTO(coverage.getTeacher()));
+        coverageDTO.setSubject(subjectToSubjectDTO(coverage.getSubject()));
+        coverageDTO.setSchoolYearId(schoolYearToSchoolYearDTO(coverage.getSchoolYearId()));
 
         return coverageDTO;
     }
 
     @Override
     public CoveragePK coveragePKDToTocoveragePK(CoveragePKDTO coveragePKDTO) {
-        if ( coveragePKDTO == null ) {
+        if (coveragePKDTO == null) {
             return null;
         }
 
@@ -459,7 +476,7 @@ public class GenericMapperImpl implements GenericMapper {
 
     @Override
     public CoveragePKDTO coveragePKToCoveragePKDTO(CoveragePK coveragePK) {
-        if ( coveragePK == null ) {
+        if (coveragePK == null) {
             return null;
         }
 
@@ -470,120 +487,122 @@ public class GenericMapperImpl implements GenericMapper {
 
     @Override
     public SchoolYear schoolYearDTOToSchoolYear(SchoolYearDTO schoolYearDTO) {
-        if ( schoolYearDTO == null ) {
+        if (schoolYearDTO == null) {
             return null;
         }
 
         SchoolYear schoolYear = new SchoolYear();
 
-        schoolYear.setSchoolYearId( schoolYearDTO.getSchoolYearId() );
-        schoolYear.setSchoolYear( schoolYearDTO.getSchoolYear() );
-        schoolYear.setSemester( schoolYearDTO.getSemester() );
+        schoolYear.setSchoolYearId(schoolYearDTO.getSchoolYearId());
+        schoolYear.setSchoolYear(schoolYearDTO.getSchoolYear());
+        schoolYear.setSemester(schoolYearDTO.getSemester());
 
         return schoolYear;
     }
 
     @Override
     public SchoolYearDTO schoolYearToSchoolYearDTO(SchoolYear schoolYear) {
-        if ( schoolYear == null ) {
+        if (schoolYear == null) {
             return null;
         }
 
         SchoolYearDTO schoolYearDTO = new SchoolYearDTO();
 
-        schoolYearDTO.setSchoolYearId( schoolYear.getSchoolYearId() );
-        schoolYearDTO.setSchoolYear( schoolYear.getSchoolYear() );
-        schoolYearDTO.setSemester( schoolYear.getSemester() );
+        schoolYearDTO.setSchoolYearId(schoolYear.getSchoolYearId());
+        schoolYearDTO.setSchoolYear(schoolYear.getSchoolYear());
+        schoolYearDTO.setSemester(schoolYear.getSemester());
 
         return schoolYearDTO;
     }
 
     @Override
     public EventType eventTypeDTOToEventType(EventTypeDTO eventTypeDTO) {
-        if ( eventTypeDTO == null ) {
+        if (eventTypeDTO == null) {
             return null;
         }
 
         EventType eventType = new EventType();
 
-        eventType.setEventTypeId( eventTypeDTO.getEventTypeId() );
+        eventType.setEventTypeId(eventTypeDTO.getEventTypeId());
+        eventType.setName(eventTypeDTO.getName());
 
         return eventType;
     }
 
     @Override
     public EventTypeDTO eventTypeToEventTypeDTO(EventType eventType) {
-        if ( eventType == null ) {
+        if (eventType == null) {
             return null;
         }
 
         EventTypeDTO eventTypeDTO = new EventTypeDTO();
 
-        eventTypeDTO.setEventTypeId( eventType.getEventTypeId() );
+        eventTypeDTO.setEventTypeId(eventType.getEventTypeId());
+        eventTypeDTO.setName(eventType.getName());
 
         return eventTypeDTO;
     }
 
     @Override
     public ScheduledConsultationDTO scheduledConsultationToStudentConsultationDTO(ScheduledConsultation scheduledConsultation) {
-        if ( scheduledConsultation == null ) {
+        if (scheduledConsultation == null) {
             return null;
         }
 
         ScheduledConsultationDTO scheduledConsultationDTO = new ScheduledConsultationDTO();
 
-        scheduledConsultationDTO.setStudentConsultationPK( scheduledConsultationPKToscheduledConsultationPKDTO( scheduledConsultation.getStudentConsultationPK() ) );
-        scheduledConsultationDTO.setStatus( scheduledConsultation.getStatus() );
-        scheduledConsultationDTO.setTitle( scheduledConsultation.getTitle() );
-        scheduledConsultationDTO.setDescription( scheduledConsultation.getDescription() );
-        scheduledConsultationDTO.setConsultation( ConsultationToConsultationDTO( scheduledConsultation.getConsultation() ) );
-        scheduledConsultationDTO.setStudent( studentToStudentDTO( scheduledConsultation.getStudent() ) );
+        scheduledConsultationDTO.setStudentConsultationPK(scheduledConsultationPKToscheduledConsultationPKDTO(scheduledConsultation.getStudentConsultationPK()));
+        scheduledConsultationDTO.setStatus(scheduledConsultation.getStatus());
+        scheduledConsultationDTO.setTitle(scheduledConsultation.getTitle());
+        scheduledConsultationDTO.setDescription(scheduledConsultation.getDescription());
+        scheduledConsultationDTO.setConsultation(ConsultationToConsultationDTO(scheduledConsultation.getConsultation()));
+        scheduledConsultationDTO.setStudent(studentToStudentDTO(scheduledConsultation.getStudent()));
 
         return scheduledConsultationDTO;
     }
 
     @Override
     public ScheduledConsultation scheduledConsultationDTOToStudentConsultation(ScheduledConsultationDTO scheduledConsultationDTO) {
-        if ( scheduledConsultationDTO == null ) {
+        if (scheduledConsultationDTO == null) {
             return null;
         }
 
         ScheduledConsultation scheduledConsultation = new ScheduledConsultation();
 
-        scheduledConsultation.setStudentConsultationPK( scheduledConsultationPKDTOToStudentConsultationPK( scheduledConsultationDTO.getStudentConsultationPK() ) );
-        scheduledConsultation.setStatus( scheduledConsultationDTO.getStatus() );
-        scheduledConsultation.setTitle( scheduledConsultationDTO.getTitle() );
-        scheduledConsultation.setDescription( scheduledConsultationDTO.getDescription() );
-        scheduledConsultation.setConsultation( ConsultationDTOToConsultation( scheduledConsultationDTO.getConsultation() ) );
-        scheduledConsultation.setStudent( studentDTOToStudent( scheduledConsultationDTO.getStudent() ) );
+        scheduledConsultation.setStudentConsultationPK(scheduledConsultationPKDTOToStudentConsultationPK(scheduledConsultationDTO.getStudentConsultationPK()));
+        scheduledConsultation.setStatus(scheduledConsultationDTO.getStatus());
+        scheduledConsultation.setTitle(scheduledConsultationDTO.getTitle());
+        scheduledConsultation.setDescription(scheduledConsultationDTO.getDescription());
+        scheduledConsultation.setConsultation(ConsultationDTOToConsultation(scheduledConsultationDTO.getConsultation()));
+        scheduledConsultation.setStudent(studentDTOToStudent(scheduledConsultationDTO.getStudent()));
 
         return scheduledConsultation;
     }
 
     @Override
     public ScheduledConsultationPK scheduledConsultationPKDTOToStudentConsultationPK(ScheduledConsultationPKDTO scheduledConsultationPKDTO) {
-        if ( scheduledConsultationPKDTO == null ) {
+        if (scheduledConsultationPKDTO == null) {
             return null;
         }
 
         ScheduledConsultationPK scheduledConsultationPK = new ScheduledConsultationPK();
 
-        scheduledConsultationPK.setCalendarId( scheduledConsultationPKDTO.getcalendarId() );
-        scheduledConsultationPK.setEventId( scheduledConsultationPKDTO.geteventId() );
+        scheduledConsultationPK.setCalendarId(scheduledConsultationPKDTO.getcalendarId());
+        scheduledConsultationPK.setEventId(scheduledConsultationPKDTO.geteventId());
 
         return scheduledConsultationPK;
     }
 
     @Override
     public ScheduledConsultationPKDTO scheduledConsultationPKToscheduledConsultationPKDTO(ScheduledConsultationPK scheduledConsultationPK) {
-        if ( scheduledConsultationPK == null ) {
+        if (scheduledConsultationPK == null) {
             return null;
         }
 
         ScheduledConsultationPKDTO scheduledConsultationPKDTO = new ScheduledConsultationPKDTO();
 
-        scheduledConsultationPKDTO.setcalendarId( scheduledConsultationPK.getCalendarId() );
-        scheduledConsultationPKDTO.seteventId( scheduledConsultationPK.getEventId() );
+        scheduledConsultationPKDTO.setcalendarId(scheduledConsultationPK.getCalendarId());
+        scheduledConsultationPKDTO.seteventId(scheduledConsultationPK.getEventId());
 
         return scheduledConsultationPKDTO;
     }
