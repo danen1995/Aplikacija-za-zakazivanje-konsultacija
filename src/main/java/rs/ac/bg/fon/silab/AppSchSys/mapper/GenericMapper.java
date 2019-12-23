@@ -65,10 +65,6 @@ public interface GenericMapper {
 
     CourseDTO courseToCourseDTO(Course course);
 
-//    CommissionMembership clanstvoKomisijeDTOToClanstvoKomisije(CommissionMembershipDTO clanstvoKomisjeDTO);
-
-//    CommissionMembershipDTO clanstvoKomisijeToClanstvoKomisijeDTO(CommissionMembership clanstvoKomisje);
-
     Teacher teacherDTOToteacher(TeacherDTO teacherDTO);
 
     TeacherDTO teacherToteacherDTO(Teacher teacher);
