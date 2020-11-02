@@ -1,0 +1,50 @@
+server:
+    port: 8084
+
+spring:
+    datasource:
+        driver:
+            class: oracle.jdbc.driver.OracleDriver
+        initialization-mode: always
+        password: konsultacije
+        url: jdbc:oracle:thin:@localhost:1521:XE
+        username: konsultacije
+    jackson:
+        serialization:
+            WRITE_DATES_AS_TIMESTAMPS: false
+        time-zone: UTC
+    jpa:
+        hibernate:
+            naming-strategy: org.hibernate.cfg.DefaultNamingStrategy
+        properties:
+            hibernate:
+                format_sql: true
+                generate_statistics: true
+        show-sql: true
+    mail:
+        host: smtp.gmail.com
+        password: konsultacije.fon123
+        port: 587
+        properties:
+            mail:
+                smtp:
+                    starttls:
+                        enable: true
+        username: konsultacije.fon@gmail.com
+
+app:
+    jwtExpirationInMs: 604800000
+    jwtSecret: JWTSuperSecretKey
+
+logging:
+    level:
+        org:
+            hibernate:
+                SQL: debug
+                stat: debug
+                type: trace
+    pattern:
+        console: '%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n'
+
+
+
